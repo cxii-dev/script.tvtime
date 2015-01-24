@@ -121,7 +121,8 @@ class Player(xbmc.Player):
 
     def onPlayBackEnded(self):
         self._tearDown()
-        
+        if self._totalTime is 0:
+        	   return
         actual_percent = (self._lastPos/self._totalTime)*100
         log('lastPos / totalTime : %s / %s = %s %%' % (self._lastPos,
             self._totalTime, actual_percent))
