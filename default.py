@@ -107,14 +107,16 @@ class Player(xbmc.Player):
         self.filename = os.path.basename(filename_full_path)
         self.episode = FindEpisode(self.token, self.filename)
         if self.episode.is_found and self.notifications:            
-            notif('%s %s s%se%s' % (__language__(32904), self.episode.showname, self.episode.season_number, self.episode.number), time=2500)
+            notif('%s %s S%sE%s' % (__language__(32904), self.episode.showname, formatNumber(self.episode.season_number), formatNumber(self.episode.number)), time=2500)
         if not self.episode.is_found and self.notifications:
             notif(__language__(32905), time=2500)
             self._tearDown()
             return
 
     def onPlayBackStopped(self):
-        # User stopped the playback
+        self.onPlayBackEnded()
+
+    def onQueueNextItem(self):
         self.onPlayBackEnded()
 
     def onPlayBackEnded(self):
@@ -130,9 +132,14 @@ class Player(xbmc.Player):
         if self.episode.is_found:        
             checkin = MarkAsWatched(self.token, self.filename, __addon__.getSetting('facebook'), __addon__.getSetting('twitter'))
             if checkin.is_marked and self.notifications:
-                notif('%s %s s%se%s' % (__language__(32906), self.episode.showname, self.episode.season_number, self.episode.number), time=2500)
+                notif('%s %s S%sE%s' % (__language__(32906), self.episode.showname, formatNumber(self.episode.season_number), formatNumber(self.episode.number)), time=2500)
             if not checkin.is_marked and self.notifications:
                 notif(__language__(32907), time=2500)
+
+def formatNumber(number):
+	 if len(number) < 2:
+	 	   number = '0%s' % number
+	 return number
 
 def notif(msg, time=5000):
     notif_msg = "%s, %s, %i, %s" % ('TVShow Time', msg, time, __icon__)
