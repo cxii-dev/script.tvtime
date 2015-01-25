@@ -75,7 +75,7 @@ class MarkAsWatched(object):
              
         request_url = "%s%s" % (request_uri, self.action)
         try:
-            response = self.opener.open(request_url, None)
+            response = self.opener.open(request_url, request_data)
             data = json.loads(''.join(response.readlines()))
         except:
             data = None
