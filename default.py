@@ -124,17 +124,18 @@ class Player(xbmc.Player):
             return
         	   
         self.filename = os.path.basename(filename_full_path)
-        self.episode = FindEpisode(self.token, self.filename)
         log('#DEBUG# episode=%s' % self.filename)
+        self.episode = FindEpisode(self.token, self.filename)
         log('#DEBUG# episode.is_found=%s' % self.episode.is_found)
+        log('#DEBUG# episode.resultdata=%s' % self.episode.resultdata)
         if not self.episode.is_found:
             tvshowtitle = xbmc.getInfoLabel("VideoPlayer.TVshowtitle")
             season = str(xbmc.getInfoLabel("VideoPlayer.Season"))
             episode = str(xbmc.getInfoLabel("VideoPlayer.Episode"))
             if len(tvshowtitle) > 0 and len(season) >0 and len(episode) > 0:
                 self.filename = '%s.S%sE%s' % (formatName(tvshowtitle), season, episode)
-                self.episode = FindEpisode(self.token, self.filename)
                 log('#DEBUG# episode=%s' % self.filename)
+                self.episode = FindEpisode(self.token, self.filename)
                 log('#DEBUG# episode.is_found=%s' % self.episode.is_found)
         
         if self.episode.is_found:
@@ -163,11 +164,10 @@ def formatNumber(number):
          number = '0%s' % number
     return number
 	 
-def formatName(string):
-    string = string.strip()
-    string = unicodedata.normalize('NFKD', string).encode('ASCII', 'ignore')
-    string = string.replace(' ', '.')
-    return string	 
+def formatName(filename):
+    filename = filename.strip()
+    filename = filename.replace(' ', '.')
+    return filename	 
     
 def notif(msg, time=5000):
     notif_msg = "%s, %s, %i, %s" % ('TVShow Time', msg, time, __icon__)
