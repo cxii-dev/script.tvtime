@@ -127,6 +127,7 @@ class Player(xbmc.Player):
         log('#DEBUG# episode=%s' % self.filename)
         self.episode = FindEpisode(self.token, self.filename)
         log('#DEBUG# episode.is_found=%s' % self.episode.is_found)
+        log('#DEBUG# episode.resultdata=%s' % self.episode.resultdata)
         if not self.episode.is_found:
             tvshowtitle = xbmc.getInfoLabel("VideoPlayer.TVshowtitle")
             season = str(xbmc.getInfoLabel("VideoPlayer.Season"))
@@ -136,7 +137,7 @@ class Player(xbmc.Player):
                 log('#DEBUG# episode=%s' % self.filename)
                 self.episode = FindEpisode(self.token, self.filename)
                 log('#DEBUG# episode.is_found=%s' % self.episode.is_found)
-    
+        
         if self.episode.is_found:
             if self.notifications:            
                 notif('%s %s S%sE%s' % (__language__(32904), self.episode.showname, formatNumber(self.episode.season_number), formatNumber(self.episode.number)), time=2500)

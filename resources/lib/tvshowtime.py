@@ -37,6 +37,7 @@ class FindEpisode(object):
         
         if (data is None) or (data['result'] == "KO"):
            self.is_found = False
+           self.resultdata = data['result']
         else:
            self.is_found = True
            self.resultdata = data['result']
