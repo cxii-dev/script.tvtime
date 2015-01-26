@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#from BeautifulSoup import BeautifulSoup
 import cookielib
 import re
-import urllib, urllib2, urlparse
+import urllib, urllib2
 import json
 
 request_uri = "https://api.tvshowtime.com/v1/"
