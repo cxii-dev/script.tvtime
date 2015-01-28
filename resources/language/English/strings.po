@@ -1,7 +1,7 @@
 # XBMC Media Center language file
 # Addon Name: TVShow Time
 # Addon id: script.tvshowtime
-# Addon version: 1.0.0
+# Addon version: 1.0.7
 # Addon Provider: CXII
 msgid ""
 msgstr ""
@@ -29,36 +29,48 @@ msgctxt "#32001"
 msgid "General"
 msgstr ""
 
-msgctxt "#32002"
-msgid "Notifications"
-msgstr ""
-
 msgctxt "#32101"
-msgid "Get Your token at bit.ly/TVShowTime"
+msgid "Authentication"
 msgstr ""
 
 msgctxt "#32102"
-msgid "Token"
+msgid "Username"
 msgstr ""
 
 msgctxt "#32103"
-msgid "Mark as watched from"
-msgstr ""
-
-msgctxt "#32104"
-msgid "Publish on Facebook"
-msgstr ""
-
-msgctxt "#32105"
-msgid "Publish on Twitter"
+msgid "Password"
 msgstr ""
 
 msgctxt "#32201"
+msgid "Watched"
+msgstr ""
+
+msgctxt "#32202"
+msgid "Mark as watched from (%)"
+msgstr ""
+
+msgctxt "#32301"
+msgid "Social networks"
+msgstr ""
+
+msgctxt "#32302"
+msgid "Publish on Facebook"
+msgstr ""
+
+msgctxt "#32303"
+msgid "Publish on Twitter"
+msgstr ""
+
+msgctxt "#32401"
+msgid "Notifications"
+msgstr ""
+
+msgctxt "#32402"
 msgid "Show notifications"
 msgstr ""
 
 msgctxt "#32901"
-msgid "Please set your Token"
+msgid "Please authenticate"
 msgstr ""
 
 msgctxt "#32902"
@@ -83,4 +95,8 @@ msgstr ""
 
 msgctxt "#32907"
 msgid "Error 325324"
+msgstr ""
+
+msgctxt "#32908"
+msgid "Unwatched"
 msgstr ""

@@ -83,6 +83,41 @@ class MarkAsWatched(object):
            self.is_marked = False
         else:
            self.is_marked = True
+           
+class MarkAsUnWatched(object):
+    def __init__(self, token, filename):
+        self.token = token
+        self.filename = filename
+        self.action = 'checkout'
+        request_data = urllib.urlencode({
+            'access_token' : self.token,
+            'filename' : self.filename
+            })
+        
+        self.cj = cookielib.CookieJar()
+        self.opener = urllib2.build_opener(
+            urllib2.HTTPRedirectHandler(),
+            urllib2.HTTPHandler(debuglevel=0),
+            urllib2.HTTPSHandler(debuglevel=0),
+            urllib2.HTTPCookieProcessor(self.cj)
+        )
+        self.opener.addheaders = [
+            ('User-agent', 'Lynx/2.8.1pre.9 libwww-FM/2.14')
+        ]
+                           
+        self.opener.get_method = lambda: 'POST'
+             
+        request_url = "%s%s" % (request_uri, self.action)
+        try:
+            response = self.opener.open(request_url, request_data)
+            data = json.loads(''.join(response.readlines()))
+        except:
+            data = None
+        
+        if (data is None) or (data['result'] == "KO"):
+           self.is_unmarked = False
+        else:
+           self.is_unmarked = True
             
 class GetUserInformations(object):
     def __init__(self, token):
@@ -110,9 +145,44 @@ class GetUserInformations(object):
             data = None
         
         if (data is None) or (data['result'] == "KO"):
+           self.is_authenticated = False
+        else:
+           self.is_authenticated = True
+           self.username = data['user']['name']
+           
+class Signin(object):
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+        self.action = 'signin'
+        request_data = urllib.urlencode({
+            'client_id' : '845mHJx5-CxI8dSlStHB',
+            'username' : self.username,
+            'password' : self.password
+            })
+        
+        self.cj = cookielib.CookieJar()
+        self.opener = urllib2.build_opener(
+            urllib2.HTTPRedirectHandler(),
+            urllib2.HTTPHandler(debuglevel=0),
+            urllib2.HTTPSHandler(debuglevel=0),
+            urllib2.HTTPCookieProcessor(self.cj)
+        )
+        self.opener.addheaders = [
+            ('User-agent', 'Lynx/2.8.1pre.9 libwww-FM/2.14')
+        ]
+                           
+        self.opener.get_method = lambda: 'POST'
+             
+        request_url = "%s%s" % (request_uri, self.action)
+        try:
+            response = self.opener.open(request_url, request_data)
+            data = json.loads(''.join(response.readlines()))
+        except:
+            data = None
+        
+        if (data is None) or (data['result'] == "KO"):
            self.is_connected = False
         else:
            self.is_connected = True
-           self.resultdata = data['result']
-           self.username = data['user']['name']
-
+           self.token = data['access_token']

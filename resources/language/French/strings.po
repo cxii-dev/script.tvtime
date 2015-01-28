@@ -1,7 +1,7 @@
 # XBMC Media Center language file
 # Addon Name: TVShow Time
 # Addon id: script.tvshowtime
-# Addon version: 1.0.0
+# Addon version: 1.0.7
 # Addon Provider: CXII
 msgid ""
 msgstr ""
@@ -29,37 +29,49 @@ msgctxt "#32001"
 msgid "General"
 msgstr "Général"
 
-msgctxt "#32002"
-msgid "Notifications"
-msgstr "Notifications"
-
 msgctxt "#32101"
-msgid "Get Your token at bit.ly/TVShowTime"
-msgstr "Récupérez votre jeton sur bit.ly/TVShowTime"
+msgid "Authentication"
+msgstr "Authentification"
 
 msgctxt "#32102"
-msgid "Token"
-msgstr "Jeton"
+msgid "Username"
+msgstr "Utilisateur"
 
 msgctxt "#32103"
+msgid "Password"
+msgstr "Mot de passe"
+
+msgctxt "#32201"
+msgid "Watched"
+msgstr "Regardé"
+
+msgctxt "#32202"
 msgid "Mark as watched from"
-msgstr "Marquez comme lu à partir de"
+msgstr "Marquer comme regardé à partir de (%)"
 
-msgctxt "#32104"
+msgctxt "#32301"
+msgid "Social networks"
+msgstr "Réseaux sociaux"
+
+msgctxt "#32302"
 msgid "Publish on Facebook"
-msgstr "Plublier sur Facebook"
+msgstr "Publier sur Facebook"
 
-msgctxt "#32105"
+msgctxt "#32303"
 msgid "Publish on Twitter"
 msgstr "Publier sur Twitter"
 
-msgctxt "#32201"
+msgctxt "#32401"
+msgid "Notifications"
+msgstr "Notifications"
+
+msgctxt "#32402"
 msgid "Show notifications"
 msgstr "Afficher les notifications"
 
 msgctxt "#32901"
-msgid "Please set your Token"
-msgstr "veuillez configurer votre jeton"
+msgid "Please authenticate"
+msgstr "Veuillez vous authentifier"
 
 msgctxt "#32902"
 msgid "Welcome"
@@ -84,3 +96,7 @@ msgstr "Regardé"
 msgctxt "#32907"
 msgid "Error 325324"
 msgstr "Erreur 325324"
+
+msgctxt "#32908"
+msgid "Unwatched"
+msgstr "Non regardé"

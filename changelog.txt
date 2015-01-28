@@ -1,5 +1,9 @@
+1.0.7
+add the function to mark and unmark from the contextual menu of an episode
+change the way to authenticate
+
 1.0.6
-Cleaned code
+clean the code
 
 1.0.5
 add a second way to find the episode on TVST
@@ -20,4 +24,4 @@ add onQueueNextItem function
 add format number function to SXXEYY
 
 1.0.0
-First version
+first version
