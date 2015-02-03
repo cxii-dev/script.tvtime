@@ -40,6 +40,35 @@ class Monitor(xbmc.Monitor):
     def onNotification(self, sender, method, data):
         log('onNotification')
         log('method=%s' % method)
+        if (method == 'Player.OnPlay'):
+            log('Player.OnPlay')
+            player._setUp()
+            player._totalTime = player.getTotalTime()
+            player._tracker.start()
+            response = json.loads(data) 
+            log('%s' % response)
+            if response.get('item').get('type') == 'episode':
+                xbmc_id = response.get('item').get('id')
+                item = self.getEpisodeTVDB(xbmc_id)    
+                log('showtitle=%s' % item['showtitle'])
+                log('season=%s' % item['season'])
+                log('episode=%s' % item['episode'])
+                if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0:                   
+                    player.filename = '%s.S%sE%s' % (formatName(item['showtitle']), item['season'], item['episode'])
+                    log('tvshowtitle=%s' % player.filename)
+                    player.episode = FindEpisode(player.user.token, player.filename)
+                    log('episode.is_found=%s' % player.episode.is_found)
+                    if player.episode.is_found:
+                        if self.notifications:            
+                            notif('%s %s %sx%s' % (__language__(32904), player.episode.showname, player.episode.season_number, player.episode.number), time=2500)
+                    else:
+                        if self.notifications:
+                            notif(__language__(32905), time=2500)
+                        player._tearDown()
+                else:
+                    if self.notifications:
+                        notif(__language__(32905), time=2500)
+                    player._tearDown()
         if (method == 'VideoLibrary.OnUpdate'):
             log('VideoLibrary.OnUpdate')
             response = json.loads(data) 
@@ -47,9 +76,13 @@ class Monitor(xbmc.Monitor):
             if response.get('item').get('type') == 'episode':
                 xbmc_id = response.get('item').get('id')
                 playcount = response.get('playcount') 
-                log('playcount=%s' % playcount)    
-                item = self.getEpisodeTVDB(xbmc_id)            
-                if len(item['showtitle']) > 0 and item['season'] >0 and item['episode'] > 0:
+                log('playcount=%s' % playcount)
+                item = self.getEpisodeTVDB(xbmc_id)    
+                log('showtitle=%s' % item['showtitle'])
+                log('season=%s' % item['season'])
+                log('episode=%s' % item['episode'])
+                log('playcount=%s' % playcount)
+                if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0:
                     self.filename = '%s.S%sE%s' % (formatName(item['showtitle']), item['season'], item['episode'])
                     log('tvshowtitle=%s' % self.filename)
                     self.episode = FindEpisode(player.user.token, self.filename)
@@ -60,16 +93,16 @@ class Monitor(xbmc.Monitor):
                             log('checkin.is_marked:=%s' % checkin.is_marked)
                             if checkin.is_marked:
                                 if self.notifications:
-                                    notif('%s %s S%sE%s' % (__language__(32906), self.episode.showname, formatNumber(self.episode.season_number), formatNumber(self.episode.number)), time=2500)
+                                    notif('%s %s %sx%s' % (__language__(32906), self.episode.showname, self.episode.season_number, self.episode.number), time=2500)
                                 else:
                                     if self.notifications:
                                         notif(__language__(32907), time=2500)
-                        else:
+                        if playcount is 0:
                             checkin = MarkAsUnWatched(player.user.token, self.filename)
                             log('checkin.is_unmarked:=%s' % checkin.is_unmarked)
                             if checkin.is_unmarked:
                                 if self.notifications:
-                                    notif('%s %s S%sE%s' % (__language__(32908), self.episode.showname, formatNumber(self.episode.season_number), formatNumber(self.episode.number)), time=2500)
+                                    notif('%s %s %sx%s' % (__language__(32908), self.episode.showname, self.episode.season_number, self.episode.number), time=2500)
                                 else:
                                     if self.notifications:
                                         notif(__language__(32907), time=2500)
@@ -145,7 +178,7 @@ class Player(xbmc.Player):
                         log('checkin.is_marked:=%s' % checkin.is_marked)
                         if checkin.is_marked:
                             if self.notifications:
-                                notif('%s %s S%sE%s' % (__language__(32906), self.episode.showname, formatNumber(self.episode.season_number), formatNumber(self.episode.number)), time=2500)
+                                notif('%s %s %sx%s' % (__language__(32906), self.episode.showname, self.episode.season_number, self.episode.number), time=2500)
                         else:
                             if self.notifications:
                                 notif(__language__(32907), time=2500)
@@ -177,40 +210,40 @@ class Player(xbmc.Player):
             notif(__language__(32903), time=2500)
         return user
 
-    def onPlayBackStarted(self):
-        log('onPlayBackStarted')
-        self._setUp()
-        self._totalTime = self.getTotalTime()
-        self._tracker.start()
-    	  
-        filename_full_path = self.getPlayingFile().decode('utf-8') 
-        if _is_excluded(filename_full_path):
-            self._tearDown()
-            return
-        	   
-        tvshowtitle = xbmc.getInfoLabel("ListItem.TVshowtitle")
-        season = xbmc.getInfoLabel("ListItem.Season")
-        episode = xbmc.getInfoLabel("ListItem.Episode")
-        log('tvshowtitle=%s' % tvshowtitle)
-        log('season=%s' % season)
-        log('episode=%s' % episode)
-        if len(tvshowtitle) > 0 and season > 0 and episode > 0:
-            self.filename = '%s.S%sE%s' % (formatName(tvshowtitle), season, episode)
-            log('filename=%s' % self.filename)
-            self.episode = FindEpisode(self.user.token, self.filename)
-            log('episode.is_found=%s' % self.episode.is_found)
-    
-            if self.episode.is_found:
-                if self.notifications:            
-                    notif('%s %s S%sE%s' % (__language__(32904), self.episode.showname, formatNumber(self.episode.season_number), formatNumber(self.episode.number)), time=2500)
-            else:
-                if self.notifications:
-                    notif(__language__(32905), time=2500)
-                self._tearDown()
-        else:
-            if self.notifications:
-                notif(__language__(32905), time=2500)
-            self._tearDown()
+    #def onPlayBackStarted(self):
+        #log('onPlayBackStarted')
+        #self._setUp()
+        #self._totalTime = self.getTotalTime()
+        #self._tracker.start()
+    	  #
+        #filename_full_path = self.getPlayingFile().decode('utf-8') 
+        #if _is_excluded(filename_full_path):
+        #    self._tearDown()
+        #    return
+        #	   
+        #tvshowtitle = xbmc.getInfoLabel("ListItem.TVshowtitle")
+        #season = xbmc.getInfoLabel("ListItem.Season")
+        #episode = xbmc.getInfoLabel("ListItem.Episode")
+        #log('tvshowtitle=%s' % tvshowtitle)
+        #log('season=%s' % season)
+        #log('episode=%s' % episode)
+        #if len(tvshowtitle) > 0 and season > 0 and episode > 0:
+        #    self.filename = '%s.S%sE%s' % (formatName(tvshowtitle), season, episode)
+        #    log('filename=%s' % self.filename)
+        #    self.episode = FindEpisode(self.user.token, self.filename)
+        #    log('episode.is_found=%s' % self.episode.is_found)
+        #
+        #    if self.episode.is_found:
+        #        if self.notifications:            
+        #            notif('%s %s %sx%s' % (__language__(32904), self.episode.showname, self.episode.season_number, self.episode.number), time=2500)
+        #    else:
+        #        if self.notifications:
+        #            notif(__language__(32905), time=2500)
+        #        self._tearDown()
+        #else:
+        #    if self.notifications:
+        #        notif(__language__(32905), time=2500)
+        #    self._tearDown()
 
     def onPlayBackStopped(self):
         log('onPlayBackStopped')
@@ -240,7 +273,7 @@ def notif(msg, time=5000):
 
 def log(msg):
     xbmc.log("### [%s] - %s" % (__scriptname__, msg.encode('utf-8'), ),
-            level=xbmc.LOGDEBUG) #100 #xbmc.LOGDEBUG
+            level=100) #100 #xbmc.LOGDEBUG
 
 def _is_excluded(filename):
     log("_is_excluded(): Check if '%s' is a URL." % filename)

@@ -1,3 +1,7 @@
+1.0.8
+bug fixes
+change the way of checking episode
+
 1.0.7
 add the function to mark and unmark from the contextual menu of an episode
 change the way to authenticate
@@ -14,7 +18,7 @@ add debug log
 bug fixes
 
 1.0.3
-changed the way of checking episode
+change the way of checking episode
 
 1.0.2
 fix error when episode not found
