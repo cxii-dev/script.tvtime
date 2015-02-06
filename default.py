@@ -29,9 +29,6 @@ class Monitor(xbmc.Monitor):
     def __init__( self, *args, **kwargs ):
         xbmc.Monitor.__init__( self )
         self.action = kwargs['action']
-        self.facebook = __addon__.getSetting('facebook')
-        self.twitter = __addon__.getSetting('twitter')
-        self.notifications = __addon__.getSetting('notifications')
 
     def onSettingsChanged( self ):
         log('onSettingsChanged')
@@ -42,9 +39,6 @@ class Monitor(xbmc.Monitor):
         log('method=%s' % method)
         if (method == 'Player.OnPlay'):
             log('Player.OnPlay')
-            player._setUp()
-            player._totalTime = player.getTotalTime()
-            player._tracker.start()
             response = json.loads(data) 
             log('%s' % response)
             if response.get('item').get('type') == 'episode':
@@ -59,16 +53,14 @@ class Monitor(xbmc.Monitor):
                     player.episode = FindEpisode(player.user.token, player.filename)
                     log('episode.is_found=%s' % player.episode.is_found)
                     if player.episode.is_found:
-                        if self.notifications:            
+                        if player.notifications:            
                             notif('%s %s %sx%s' % (__language__(32904), player.episode.showname, player.episode.season_number, player.episode.number), time=2500)
                     else:
-                        if self.notifications:
+                        if player.notifications:
                             notif(__language__(32905), time=2500)
-                        player._tearDown()
                 else:
-                    if self.notifications:
+                    if player.notifications:
                         notif(__language__(32905), time=2500)
-                    player._tearDown()
         if (method == 'VideoLibrary.OnUpdate'):
             log('VideoLibrary.OnUpdate')
             response = json.loads(data) 
@@ -89,27 +81,23 @@ class Monitor(xbmc.Monitor):
                     log('episode.is_found=%s' % self.episode.is_found)
                     if self.episode.is_found:
                         if playcount is 1:
-                            checkin = MarkAsWatched(player.user.token, self.filename, __addon__.getSetting('facebook'), __addon__.getSetting('twitter'))
+                            checkin = MarkAsWatched(player.user.token, self.filename, player.facebook, player.twitter)
                             log('checkin.is_marked:=%s' % checkin.is_marked)
                             if checkin.is_marked:
-                                if self.notifications:
+                                if player.notifications:
                                     notif('%s %s %sx%s' % (__language__(32906), self.episode.showname, self.episode.season_number, self.episode.number), time=2500)
                                 else:
-                                    if self.notifications:
+                                    if player.notifications:
                                         notif(__language__(32907), time=2500)
                         if playcount is 0:
                             checkin = MarkAsUnWatched(player.user.token, self.filename)
                             log('checkin.is_unmarked:=%s' % checkin.is_unmarked)
                             if checkin.is_unmarked:
-                                if self.notifications:
+                                if player.notifications:
                                     notif('%s %s %sx%s' % (__language__(32908), self.episode.showname, self.episode.season_number, self.episode.number), time=2500)
                                 else:
-                                    if self.notifications:
+                                    if player.notifications:
                                         notif(__language__(32907), time=2500)
-            #if response.get('item').get('type') == 'tvshow':
-            #    xbmc_id = response.get('item').get('id')
-            #    items = self.getAllEpisodes(xbmc_id)
-            #    log('%s' % items)
 
     def getEpisodeTVDB(self, xbmc_id):
         rpccmd = {'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {"episodeid": int(xbmc_id), 'properties': ['season', 'episode', 'tvshowid', 'showtitle']}, 'id': 1}
@@ -151,54 +139,11 @@ class Player(xbmc.Player):
         self.user = self._loginTVST()
         if not self.user.is_connected:
             return
-        self._lastPos = 0
-        self._min_percent = int(__addon__.getSetting('watched-percent'))
-        self._tracker = None
-        self._playbackLock = threading.Event()
         self._monitor = Monitor(action = self._reset)
         log('Player - monitor')
         
     def _reset(self):
-        self._tearDown()
         self.__init__()
-        
-    def _trackPosition(self):
-        while self._playbackLock.isSet() and not xbmc.abortRequested:
-            try:
-                self._lastPos = self.getTime()
-            except:
-                self._playbackLock.clear()
-            if self._totalTime > 0:
-                actual_percent = (self._lastPos/self._totalTime)*100
-                #log('actual_percent=%s' % actual_percent)
-                if (actual_percent >= self._min_percent):
-                    log('episode.is_found=%s' % self.episode.is_found)
-                    if self.episode.is_found:        
-                        checkin = MarkAsWatched(self.user.token, self.filename, __addon__.getSetting('facebook'), __addon__.getSetting('twitter'))
-                        log('checkin.is_marked:=%s' % checkin.is_marked)
-                        if checkin.is_marked:
-                            if self.notifications:
-                                notif('%s %s %sx%s' % (__language__(32906), self.episode.showname, self.episode.season_number, self.episode.number), time=2500)
-                        else:
-                            if self.notifications:
-                                notif(__language__(32907), time=2500)
-            
-                        self._tearDown()
-            xbmc.sleep(250)
-
-    def _setUp(self):
-        self._playbackLock.set()
-        self._tracker = threading.Thread(target=self._trackPosition)
-
-    def _tearDown(self):
-        if hasattr(self, '_playbackLock'):
-            self._playbackLock.clear()
-        #self._monitor = None
-        if not hasattr(self, '_tracker'):
-            return
-        if self._tracker is None:
-            return
-        self._tracker = None
 
     def _loginTVST(self):
         log('_loginTVST')
@@ -209,53 +154,6 @@ class Player(xbmc.Player):
         else:
             notif(__language__(32903), time=2500)
         return user
-
-    #def onPlayBackStarted(self):
-        #log('onPlayBackStarted')
-        #self._setUp()
-        #self._totalTime = self.getTotalTime()
-        #self._tracker.start()
-    	  #
-        #filename_full_path = self.getPlayingFile().decode('utf-8') 
-        #if _is_excluded(filename_full_path):
-        #    self._tearDown()
-        #    return
-        #	   
-        #tvshowtitle = xbmc.getInfoLabel("ListItem.TVshowtitle")
-        #season = xbmc.getInfoLabel("ListItem.Season")
-        #episode = xbmc.getInfoLabel("ListItem.Episode")
-        #log('tvshowtitle=%s' % tvshowtitle)
-        #log('season=%s' % season)
-        #log('episode=%s' % episode)
-        #if len(tvshowtitle) > 0 and season > 0 and episode > 0:
-        #    self.filename = '%s.S%sE%s' % (formatName(tvshowtitle), season, episode)
-        #    log('filename=%s' % self.filename)
-        #    self.episode = FindEpisode(self.user.token, self.filename)
-        #    log('episode.is_found=%s' % self.episode.is_found)
-        #
-        #    if self.episode.is_found:
-        #        if self.notifications:            
-        #            notif('%s %s %sx%s' % (__language__(32904), self.episode.showname, self.episode.season_number, self.episode.number), time=2500)
-        #    else:
-        #        if self.notifications:
-        #            notif(__language__(32905), time=2500)
-        #        self._tearDown()
-        #else:
-        #    if self.notifications:
-        #        notif(__language__(32905), time=2500)
-        #    self._tearDown()
-
-    def onPlayBackStopped(self):
-        log('onPlayBackStopped')
-        self.onPlayBackEnded()
-
-    def onQueueNextItem(self):
-        log('onQueueNextItem')
-        self.onPlayBackEnded()
-
-    def onPlayBackEnded(self):
-        log('onPlayBackEnded')
-        self._tearDown()
 
 def formatNumber(number):
     if len(number) < 2:

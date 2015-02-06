@@ -4,8 +4,6 @@
 	   <setting type="lsep" label="32101" />
 	   <setting id="username" type="text" label="32102" default="" />
 	   <setting id="password" type="text" label="32103" default="" option="hidden" />
-	   <setting type="lsep" label="32201" />
-	   <setting id="watched-percent" type="labelenum" label="32202" default="3" values="85|90|95|100" />
 	   <setting type="lsep" label="32301" />
 	   <setting id="facebook" type="bool" label="32302" default="true" />
 	   <setting id="twitter" type="bool" label="32303" default="true" />

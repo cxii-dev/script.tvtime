@@ -41,14 +41,6 @@ msgctxt "#32103"
 msgid "Password"
 msgstr "Mot de passe"
 
-msgctxt "#32201"
-msgid "Watched"
-msgstr "Regardé"
-
-msgctxt "#32202"
-msgid "Mark as watched from"
-msgstr "Marquer comme regardé à partir de (%)"
-
 msgctxt "#32301"
 msgid "Social networks"
 msgstr "Réseaux sociaux"
@@ -78,8 +70,8 @@ msgid "Welcome"
 msgstr "Bienvenue"
 
 msgctxt "#32903"
-msgid "Token error - Please try again"
-msgstr "Erreur de jeton - Veuillez réessayer"
+msgid "Error - Please check your authentication informations"
+msgstr "Erreur - Veuillez vérifier vos données d'authentification"
 
 msgctxt "#32904"
 msgid "Watching"

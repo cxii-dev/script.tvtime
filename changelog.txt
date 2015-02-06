@@ -1,6 +1,9 @@
+1.0.9
+clean the code
+
 1.0.8
 bug fixes
-change the way of checking episode
+change the way of checking an episode
 
 1.0.7
 add the function to mark and unmark from the contextual menu of an episode
@@ -18,7 +21,7 @@ add debug log
 bug fixes
 
 1.0.3
-change the way of checking episode
+change the way of checking an episode
 
 1.0.2
 fix error when episode not found

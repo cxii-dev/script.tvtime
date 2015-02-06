@@ -41,14 +41,6 @@ msgctxt "#32103"
 msgid "Password"
 msgstr ""
 
-msgctxt "#32201"
-msgid "Watched"
-msgstr ""
-
-msgctxt "#32202"
-msgid "Mark as watched from (%)"
-msgstr ""
-
 msgctxt "#32301"
 msgid "Social networks"
 msgstr ""
@@ -78,7 +70,7 @@ msgid "Welcome"
 msgstr ""
 
 msgctxt "#32903"
-msgid "Token error - Please try again"
+msgid "Error - Please check your authentication informations"
 msgstr ""
 
 msgctxt "#32904"
