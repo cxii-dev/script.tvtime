@@ -171,7 +171,7 @@ def notif(msg, time=5000):
 
 def log(msg):
     xbmc.log("### [%s] - %s" % (__scriptname__, msg.encode('utf-8'), ),
-            level=100) #100 #xbmc.LOGDEBUG
+            level=xbmc.LOGDEBUG) #100 #xbmc.LOGDEBUG
 
 def _is_excluded(filename):
     log("_is_excluded(): Check if '%s' is a URL." % filename)
