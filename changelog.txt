@@ -1,3 +1,6 @@
+1.0.11
+revert the way to authenticate due to api changes
+
 1.0.10
 put the log to xbmc.LOGDEBUG
 

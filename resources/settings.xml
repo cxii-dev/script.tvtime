@@ -2,8 +2,7 @@
 <settings>
    <category label="32001">
 	   <setting type="lsep" label="32101" />
-	   <setting id="username" type="text" label="32102" default="" />
-	   <setting id="password" type="text" label="32103" default="" option="hidden" />
+	   <setting id="token" type="text" label="32102" default="" />
 	   <setting type="lsep" label="32301" />
 	   <setting id="facebook" type="bool" label="32302" default="true" />
 	   <setting id="twitter" type="bool" label="32303" default="true" />

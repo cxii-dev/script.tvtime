@@ -30,16 +30,12 @@ msgid "General"
 msgstr "Général"
 
 msgctxt "#32101"
-msgid "Authentication"
-msgstr "Authentification"
+msgid "Get token: bit.ly/TVShowTime"
+msgstr "Récuprérez votre jeton: bit.ly/TVShowTime"
 
 msgctxt "#32102"
-msgid "Username"
-msgstr "Utilisateur"
-
-msgctxt "#32103"
-msgid "Password"
-msgstr "Mot de passe"
+msgid "Token"
+msgstr "Jeton"
 
 msgctxt "#32301"
 msgid "Social networks"
@@ -62,8 +58,8 @@ msgid "Show notifications"
 msgstr "Afficher les notifications"
 
 msgctxt "#32901"
-msgid "Please authenticate"
-msgstr "Veuillez vous authentifier"
+msgid "Please set your token"
+msgstr "Veuillez rentrer votre jeton"
 
 msgctxt "#32902"
 msgid "Welcome"

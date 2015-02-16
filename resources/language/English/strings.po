@@ -30,15 +30,11 @@ msgid "General"
 msgstr ""
 
 msgctxt "#32101"
-msgid "Authentication"
+msgid "Get token: bit.ly/TVShowTime"
 msgstr ""
 
 msgctxt "#32102"
-msgid "Username"
-msgstr ""
-
-msgctxt "#32103"
-msgid "Password"
+msgid "Token"
 msgstr ""
 
 msgctxt "#32301"
@@ -62,7 +58,7 @@ msgid "Show notifications"
 msgstr ""
 
 msgctxt "#32901"
-msgid "Please authenticate"
+msgid "Please set your token"
 msgstr ""
 
 msgctxt "#32902"

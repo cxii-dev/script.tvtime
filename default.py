@@ -81,6 +81,7 @@ class Monitor(xbmc.Monitor):
                     log('episode.is_found=%s' % self.episode.is_found)
                     if self.episode.is_found:
                         if playcount is 1:
+                            log('MarkAsWatched(*, %s, %s, %s)' % (self.filename, player.facebook, player.twitter))
                             checkin = MarkAsWatched(player.user.token, self.filename, player.facebook, player.twitter)
                             log('checkin.is_marked:=%s' % checkin.is_marked)
                             if checkin.is_marked:
@@ -90,6 +91,7 @@ class Monitor(xbmc.Monitor):
                                     if player.notifications:
                                         notif(__language__(32907), time=2500)
                         if playcount is 0:
+                            log('MarkAsUnWatched(*, %s)' % (self.filename))
                             checkin = MarkAsUnWatched(player.user.token, self.filename)
                             log('checkin.is_unmarked:=%s' % checkin.is_unmarked)
                             if checkin.is_unmarked:
@@ -127,17 +129,16 @@ class Player(xbmc.Player):
     def __init__ (self):
         xbmc.Player.__init__(self)
         log('Player - init')
-        self.username = __addon__.getSetting('username')
-        self.password = __addon__.getSetting('password')
+        self.token = __addon__.getSetting('token')
         self.facebook = __addon__.getSetting('facebook')
         self.twitter = __addon__.getSetting('twitter')
         self.notifications = __addon__.getSetting('notifications')
-        if self.username is '' or self.password is '':
+        if self.token is '':
             log(__language__(32901))
             notif(__language__(32901), time=2500)
             return
         self.user = self._loginTVST()
-        if not self.user.is_connected:
+        if not self.user.is_authenticated:
             return
         self._monitor = Monitor(action = self._reset)
         log('Player - monitor')
@@ -147,10 +148,10 @@ class Player(xbmc.Player):
 
     def _loginTVST(self):
         log('_loginTVST')
-        user = Signin(self.username, self.password)
-        if user.is_connected:
+        user = GetUserInformations(self.token)
+        if user.is_authenticated:
             if self.notifications:
-                notif('%s %s' % (__language__(32902), self.username), time=2500)
+                notif('%s %s' % (__language__(32902), user.username), time=2500)
         else:
             notif(__language__(32903), time=2500)
         return user
