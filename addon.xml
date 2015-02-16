@@ -9,8 +9,8 @@
   <extension point="xbmc.service" library="default.py" start="login"/>
   <extension point="xbmc.addon.metadata">
     <summary lang="en">TVShow Time</summary>
-    <description lang="en">Automatically set watched episodes on tvshowtime.com - Can be done when watching the episode, or from the contextual menu of the episode.</description>
-    <description lang="fr">Marque automatiquement les épisodes comme regardé sur tvshowtime.com - Peut être fait tout en ragardant l'épisode ou via le menu contextuel de l'épisode.</description>
+    <description lang="en">Automatically set watched episodes on tvshowtime.com - Can be done when watching the episode, or from the contextual menu of the episode. Get your token here: http://bit.ly/TVShowTime</description>
+    <description lang="fr">Marque automatiquement les épisodes comme regardé sur tvshowtime.com - Peut être fait tout en ragardant l'épisode ou via le menu contextuel de l'épisode. Récupérez votre jeton ici: bit.ly/TVShowTime</description>
     <platform>all</platform>
     <language>en fr</language>
     <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
