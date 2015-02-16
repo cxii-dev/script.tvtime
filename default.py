@@ -49,7 +49,7 @@ class Monitor(xbmc.Monitor):
                 if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0:                   
                     player.filename = '%s.S%sE%s' % (formatName(item['showtitle']), item['season'], item['episode'])
                     log('tvshowtitle=%s' % player.filename)
-                    player.episode = FindEpisode(player.user.token, player.filename)
+                    player.episode = FindEpisode(player.token, player.filename)
                     log('episode.is_found=%s' % player.episode.is_found)
                     if player.episode.is_found:
                         if player.notifications:            
@@ -76,12 +76,12 @@ class Monitor(xbmc.Monitor):
                 if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0:
                     self.filename = '%s.S%sE%s' % (formatName(item['showtitle']), item['season'], item['episode'])
                     log('tvshowtitle=%s' % self.filename)
-                    self.episode = FindEpisode(player.user.token, self.filename)
+                    self.episode = FindEpisode(player.token, self.filename)
                     log('episode.is_found=%s' % self.episode.is_found)
                     if self.episode.is_found:
                         if playcount is 1:
                             log('MarkAsWatched(*, %s, %s, %s)' % (self.filename, player.facebook, player.twitter))
-                            checkin = MarkAsWatched(player.user.token, self.filename, player.facebook, player.twitter)
+                            checkin = MarkAsWatched(player.token, self.filename, player.facebook, player.twitter)
                             log('checkin.is_marked:=%s' % checkin.is_marked)
                             if checkin.is_marked:
                                 if player.notifications:
@@ -91,7 +91,7 @@ class Monitor(xbmc.Monitor):
                                         notif(__language__(32907), time=2500)
                         if playcount is 0:
                             log('MarkAsUnWatched(*, %s)' % (self.filename))
-                            checkin = MarkAsUnWatched(player.user.token, self.filename)
+                            checkin = MarkAsUnWatched(player.token, self.filename)
                             log('checkin.is_unmarked:=%s' % checkin.is_unmarked)
                             if checkin.is_unmarked:
                                 if player.notifications:
