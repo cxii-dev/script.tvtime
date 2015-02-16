@@ -1,3 +1,7 @@
+1.0.12
+clean the code
+add compile.sh
+
 1.0.11
 revert the way to authenticate due to api changes
 

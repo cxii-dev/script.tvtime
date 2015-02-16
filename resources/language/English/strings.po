@@ -30,7 +30,7 @@ msgid "General"
 msgstr ""
 
 msgctxt "#32101"
-msgid "Get token: bit.ly/TVShowTime"
+msgid "Get token here: bit.ly/TVShowTime"
 msgstr ""
 
 msgctxt "#32102"

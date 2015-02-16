@@ -23,7 +23,6 @@ from resources.lib.tvshowtime import FindEpisode
 from resources.lib.tvshowtime import MarkAsWatched
 from resources.lib.tvshowtime import MarkAsUnWatched
 from resources.lib.tvshowtime import GetUserInformations
-from resources.lib.tvshowtime import Signin
 
 class Monitor(xbmc.Monitor):
     def __init__( self, *args, **kwargs ):
@@ -181,11 +180,10 @@ def _is_excluded(filename):
 
 if ( __name__ == "__main__" ):
     player = Player()
-    log( "[%s] - Version: %s Started" % (__scriptname__, __version__))
+    log("[%s] - Version: %s Started" % (__scriptname__, __version__))
 
     while not xbmc.abortRequested:
         xbmc.sleep(100)
 
-    log( "sys.exit(0)")
+    log("sys.exit(0)")
     sys.exit(0)
-
