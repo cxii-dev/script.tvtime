@@ -88,3 +88,35 @@ msgstr ""
 msgctxt "#32908"
 msgid "Unwatched"
 msgstr ""
+
+msgctxt "#33901"
+msgid "In which way ?"
+msgstr ""
+
+msgctxt "#33902"
+msgid "Whole TVShows"
+msgstr ""
+
+msgctxt "#33903"
+msgid "What sync ?"
+msgstr ""
+
+msgctxt "#33904"
+msgid "Whole Seasons"
+msgstr ""
+
+msgctxt "#33905"
+msgid "What season ?"
+msgstr ""
+
+msgctxt "#33906"
+msgid "Initialising"
+msgstr ""
+
+msgctxt "#33907"
+msgid "Finished"
+msgstr ""
+
+msgctxt "#33908"
+msgid "Sleep 60 secs."
+msgstr ""
