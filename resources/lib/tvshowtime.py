@@ -50,7 +50,10 @@ class MarkAsWatched(object):
         self.token = token
         self.filename = filename
         self.facebook = facebook
+        if self.facebook == True: self.facebook = 1
+        else: self.facebook = 0
         self.twitter = twitter
+        if self.twitter == True: self.twitter = 1
         self.action = 'checkin'
         request_data = urllib.urlencode({
             'access_token' : self.token,
