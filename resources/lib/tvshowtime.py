@@ -54,6 +54,7 @@ class MarkAsWatched(object):
         else: self.facebook = 0
         self.twitter = twitter
         if self.twitter == True: self.twitter = 1
+        else: self.twitter = 0
         self.action = 'checkin'
         request_data = urllib.urlencode({
             'access_token' : self.token,
