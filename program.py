@@ -29,7 +29,7 @@ __facebook__ = __addon__.getSetting('facebook')
 __twitter__ = __addon__.getSetting('twitter')
 
 def first_step():
-    if token is '':
+    if __token__ is '':
         log(__language__(32901))
         xbmcgui.Dialog().ok("TVShow Time", __language__(32901))
         return
