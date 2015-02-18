@@ -4,12 +4,12 @@ script.tvshowtime
 Kodi plugin for [TVShow Time](http://www.tvshowtime.com)
 
 This plugin will set TV shows episodes you've seen as watched on TVShow Time.
-It will also add the the TV show to your account if it was not already there.
+It will also add the new TV show to your account if it was not already there.
 
 build
 =====
 
-If you really want to build it, here is a simple script to do so:
+If you want to build it manually, here is a simple script to do so:
 ```sh
 #!/bin/bash
 
