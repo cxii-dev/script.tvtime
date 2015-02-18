@@ -14,7 +14,7 @@ If you really want to build it, here is a simple script to do so:
 #!/bin/bash
 
 dest=script.tvshowtime
-version=$(grep "^\s\+version" addon.xml | cut -f2 -d'"')
+version=$(grep -E "^\s\+version" addon.xml | cut -f2 -d'"')
 
 if [ -d $dest ]; then
     rm -r $dest
