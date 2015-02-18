@@ -42,7 +42,6 @@ def start():
     elif startmenu == 0 and __token__ is '':
         _login = GetCode()
         if _login.is_code:
-            _login.verification_url = 'http://www.tvshowtime.com/activate' # Force requested by api admin
             Authorization(_login.verification_url, _login.user_code, _login.device_code)
         else:
             xbmcgui.Dialog().ok(__scriptname__, __language__(33804))
