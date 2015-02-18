@@ -75,7 +75,7 @@ msgstr "Épisode non trouvé"
 
 msgctxt "#32906"
 msgid "Watched"
-msgstr "Regardé"
+msgstr "Vu"
 
 msgctxt "#32907"
 msgid "Error 32907"
@@ -83,7 +83,7 @@ msgstr "Erreur 32907"
 
 msgctxt "#32908"
 msgid "Unwatched"
-msgstr "Non regardé"
+msgstr "Non vu"
 
 msgctxt "#33801"
 msgid "Login"
