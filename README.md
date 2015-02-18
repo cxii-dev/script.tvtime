@@ -49,4 +49,4 @@ download
 If you want to download the release package because you can't or don't want to build it, you can do it on this link:
 http://addons.xbmc.org/show/script.tvshowtime/
 or
-[Download](here) the latests version.
+[download](here) the latests version.

@@ -19,11 +19,11 @@ msgstr ""
 
 msgctxt "Addon Summary"
 msgid "TVShow Time"
-msgstr ""
+msgstr "TVShow Time"
 
 msgctxt "Addon Description"
 msgid "Automatically set episodes as watched on TVShowTime.com"
-msgstr "Marque automatiquement les épisodes comme lu sur TVShowTime.com"
+msgstr "Marque automatiquement les épisodes comme lus sur TVShowTime.com"
 
 msgctxt "#32001"
 msgid "General"
@@ -115,11 +115,11 @@ msgstr "Entrez le code"
 
 msgctxt "#33808"
 msgid "When it's done click 'ok'"
-msgstr "Quand c'est fini, cliquez sur 'ok'"
+msgstr "Quand c'est terminé, cliquez sur 'ok'"
 
 msgctxt "#33809"
 msgid "Awaiting authorization"
-msgstr "Attente de l'autorisation"
+msgstr "Dans l'attente de l'autorisation"
 
 msgctxt "#33901"
 msgid "In which way ?"
@@ -127,7 +127,7 @@ msgstr "Dans quel sens ?"
 
 msgctxt "#33902"
 msgid "Whole TVShows"
-msgstr "Toutes les Séries"
+msgstr "Toutes les séries"
 
 msgctxt "#33903"
 msgid "What sync ?"
@@ -139,7 +139,7 @@ msgstr "Toutes les saisons"
 
 msgctxt "#33905"
 msgid "What season ?"
-msgstr "Quelle Saison ?"
+msgstr "Quelle saison ?"
 
 msgctxt "#33906"
 msgid "Initialising"
