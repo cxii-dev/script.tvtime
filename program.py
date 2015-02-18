@@ -11,6 +11,8 @@ import xbmcaddon
 import unicodedata
 import json
 
+from resources.lib.tvshowtime import GetCode
+from resources.lib.tvshowtime import Authorize
 from resources.lib.tvshowtime import IsChecked
 from resources.lib.tvshowtime import MarkAsWatched
 from resources.lib.tvshowtime import MarkAsUnWatched
@@ -28,11 +30,45 @@ __token__ = __addon__.getSetting('token')
 __facebook__ = __addon__.getSetting('facebook')
 __twitter__ = __addon__.getSetting('twitter')
 
-def first_step():
+def start():
+    menuitems = []
     if __token__ is '':
-        log(__language__(32901))
-        xbmcgui.Dialog().ok("TVShow Time", __language__(32901))
-        return
+        menuitems.append(__language__(33801))
+    else:
+        menuitems.append(__language__(33802))
+        menuitems.append(__language__(33803))
+    startmenu = xbmcgui.Dialog().select(__scriptname__, menuitems)
+    if startmenu < 0: return
+    elif startmenu == 0 and __token__ is '':
+        _login = GetCode()
+        if _login.is_code:
+            _login.verification_url = 'http://www.tvshowtime.com/activate' # Force requested by api admin
+            Authorization(_login.verification_url, _login.user_code, _login.device_code)
+        else:
+            xbmcgui.Dialog().ok(__scriptname__, __language__(33804))
+    elif startmenu == 0:
+        logout = xbmcgui.Dialog().yesno(__scriptname__, __language__(33805))
+        if logout == True:
+            __addon__.setSetting('token', '')
+            return
+        start()
+    else:
+        first_step()
+        
+def Authorization(verification_url, user_code, device_code):
+    activate = xbmcgui.Dialog().ok(__scriptname__, "%s: %s" % (__language__(33806), verification_url), "%s: %s" % (__language__(33807), user_code), __language__(33808)) 
+    if activate == True: 
+        notif(__language__(33809), time=5000)
+        xbmc.sleep(5000)
+        _authorize = Authorize(device_code)
+        if _authorize.is_authorized:
+            __addon__.setSetting('token', _authorize.access_token)
+            return
+        else:
+            Authorization(verification_url, user_code, device_code)
+    else: return
+
+def first_step():
     which_way = xbmcgui.Dialog().select(__language__(33901), ["TVShow Time > Kodi", "Kodi > TVShow Time"])
     if which_way < 0: return
     tvshows = []
@@ -152,6 +188,6 @@ def notif(msg, time=5000):
 
 def log(msg):
     xbmc.log("### [%s] - %s" % (__scriptname__, msg.encode('utf-8'), ),
-            level=100) #100 #xbmc.LOGDEBU           
+            level=xbmc.LOGDEBUG) #100 #xbmc.LOGDEBUG           
 
-first_step()
+start()

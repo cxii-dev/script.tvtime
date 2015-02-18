@@ -186,3 +186,80 @@ class GetUserInformations(object):
         else:
            self.is_authenticated = True
            self.username = data['user']['name']
+           
+class GetCode(object):
+    def __init__(self):
+        self.client_id = '845mHJx5-CxI8dSlStHB'
+        self.action = 'oauth/device/code'
+        request_data = urllib.urlencode({
+            'client_id' : self.client_id
+            })
+        
+        self.cj = cookielib.CookieJar()
+        self.opener = urllib2.build_opener(
+            urllib2.HTTPRedirectHandler(),
+            urllib2.HTTPHandler(debuglevel=0),
+            urllib2.HTTPSHandler(debuglevel=0),
+            urllib2.HTTPCookieProcessor(self.cj)
+        )
+        self.opener.addheaders = [
+            ('User-agent', 'Lynx/2.8.1pre.9 libwww-FM/2.14')
+        ]
+                           
+        self.opener.get_method = lambda: 'POST'
+             
+        request_url = "%s%s" % (request_uri, self.action)
+        try:
+            response = self.opener.open(request_url, request_data)
+            data = json.loads(''.join(response.readlines()))
+        except:
+            data = None
+        
+        if (data is None) or (data['result'] == "KO"):
+           self.is_code = False
+        else:
+           self.is_code = True
+           self.device_code = data['device_code']
+           self.user_code = data['user_code']
+           self.verification_url = data['verification_url']
+           self.expires_in = data['expires_in']
+           self.interval = data['interval']
+
+class Authorize(object):
+    def __init__(self, code):
+        self.client_id = '845mHJx5-CxI8dSlStHB'
+        self.client_secret = 'lvN6LZOZkUAH8aa_WAbvAJ4AXGcSo7irZyAPdRQj'
+        self.action = 'oauth/access_token'
+        self.code = code
+        request_data = urllib.urlencode({
+            'client_id' : self.client_id,
+            'client_secret' : self.client_secret,
+            'code' : self.code
+            })
+        
+        self.cj = cookielib.CookieJar()
+        self.opener = urllib2.build_opener(
+            urllib2.HTTPRedirectHandler(),
+            urllib2.HTTPHandler(debuglevel=0),
+            urllib2.HTTPSHandler(debuglevel=0),
+            urllib2.HTTPCookieProcessor(self.cj)
+        )
+        self.opener.addheaders = [
+            ('User-agent', 'Lynx/2.8.1pre.9 libwww-FM/2.14')
+        ]
+                           
+        self.opener.get_method = lambda: 'POST'
+             
+        request_url = "%s%s" % (request_uri, self.action)
+        try:
+            response = self.opener.open(request_url, request_data)
+            data = json.loads(''.join(response.readlines()))
+        except:
+            data = None
+        
+        if (data is None) or (data['result'] == "KO"):
+           self.is_authorized = False
+           self.message = data['message']
+        else:
+           self.is_authorized = True
+           self.access_token = data['access_token']

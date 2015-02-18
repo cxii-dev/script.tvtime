@@ -29,10 +29,6 @@ msgctxt "#32001"
 msgid "General"
 msgstr "Général"
 
-msgctxt "#32101"
-msgid "Get token here: bit.ly/TVShowTime"
-msgstr "Récupérez votre jeton ici: bit.ly/TVShowTime"
-
 msgctxt "#32102"
 msgid "Token"
 msgstr "Jeton"
@@ -58,8 +54,8 @@ msgid "Show notifications"
 msgstr "Afficher les notifications"
 
 msgctxt "#32901"
-msgid "Please set your token"
-msgstr "Veuillez rentrer votre jeton"
+msgid "Please login"
+msgstr "Veuillez vous connecter"
 
 msgctxt "#32902"
 msgid "Welcome"
@@ -82,12 +78,48 @@ msgid "Watched"
 msgstr "Regardé"
 
 msgctxt "#32907"
-msgid "Error 325324"
-msgstr "Erreur 325324"
+msgid "Error 32907"
+msgstr "Erreur 32907"
 
 msgctxt "#32908"
 msgid "Unwatched"
 msgstr "Non regardé"
+
+msgctxt "#33801"
+msgid "Login"
+msgstr "Se connecter"
+
+msgctxt "#33802"
+msgid "Logout"
+msgstr "Se déconnecter"
+
+msgctxt "#33803"
+msgid "Synchronization"
+msgstr "Synchronisation"
+
+msgctxt "#33804"
+msgid "Error 33804"
+msgstr "Erreur 33804"
+
+msgctxt "#33805"
+msgid "Logout ?"
+msgstr "Se déconnecter ?"
+
+msgctxt "#33806"
+msgid "Go to"
+msgstr "Allez à"
+
+msgctxt "#33807"
+msgid "Enter the code"
+msgstr "Entrez le code"
+
+msgctxt "#33808"
+msgid "When it's done click 'ok'"
+msgstr "Quand c'est fini, cliquez sur 'ok'"
+
+msgctxt "#33809"
+msgid "Awaiting authorization"
+msgstr "Attente de l'autorisation"
 
 msgctxt "#33901"
 msgid "In which way ?"

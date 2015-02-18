@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="script.tvshowtime"
        name="TVShow Time"
-       version="1.0.13"
+       version="1.0.14"
        provider-name="CXII">
   <requires>
-    <import addon="xbmc.python" version="2.14.0"/>
+    <import addon="xbmc.python" version="2.19.0"/>
   </requires>
-  <extension point="xbmc.service" library="default.py"/>
-  <extension point="xbmc.python.script" library="program.py"/>
+  <extension point="xbmc.python.script" library="program.py">
+    <provides>executable</provides> 
+  </extension> 
+  <extension point="xbmc.service" library="default.py" start="startup"/>
   <extension point="xbmc.addon.metadata">
     <summary lang="en">TVShow Time</summary>
-    <description lang="en">Automatically set watched episodes on tvshowtime.com - Can be done when watching the episode, or from the contextual menu of the episode. Get your token here: http://bit.ly/TVShowTime</description>
-    <description lang="fr">Marque automatiquement les épisodes comme regardé sur tvshowtime.com - Peut être fait tout en ragardant l'épisode ou via le menu contextuel de l'épisode. Récupérez votre jeton ici: bit.ly/TVShowTime</description>
+    <description lang="en">Automatically set watched episodes on tvshowtime.com - Can be done when watching the episode, or from the contextual menu of the episode.</description>
+    <description lang="fr">Marque automatiquement les épisodes comme regardé sur tvshowtime.com - Peut être fait tout en ragardant l'épisode ou via le menu contextuel de l'épisode.</description>
     <platform>all</platform>
     <language>en fr</language>
     <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>

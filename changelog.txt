@@ -1,3 +1,7 @@
+1.0.14
+change the way to authenticate due to api changes
+enhancements
+
 1.0.13
 add a program to manual sync whole/part of the library 
 

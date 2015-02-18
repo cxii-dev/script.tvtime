@@ -6,6 +6,8 @@ import re
 import sys
 import threading
 import xbmc
+import xbmcvfs
+import xbmcgui
 import xbmcaddon
 import unicodedata
 import json
@@ -136,7 +138,7 @@ class Player(xbmc.Player):
             log(__language__(32901))
             notif(__language__(32901), time=2500)
             return
-        self.user = self._loginTVST()
+        self.user = self._GetUser()
         if not self.user.is_authenticated:
             return
         self._monitor = Monitor(action = self._reset)
@@ -145,8 +147,8 @@ class Player(xbmc.Player):
     def _reset(self):
         self.__init__()
 
-    def _loginTVST(self):
-        log('_loginTVST')
+    def _GetUser(self):
+        log('_GetUser')
         user = GetUserInformations(self.token)
         if user.is_authenticated:
             if self.notifications:
@@ -185,5 +187,6 @@ if ( __name__ == "__main__" ):
     while not xbmc.abortRequested:
         xbmc.sleep(100)
 
+    self._monitor = None
     log("sys.exit(0)")
     sys.exit(0)

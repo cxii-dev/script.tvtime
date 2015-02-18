@@ -29,10 +29,6 @@ msgctxt "#32001"
 msgid "General"
 msgstr ""
 
-msgctxt "#32101"
-msgid "Get token here: bit.ly/TVShowTime"
-msgstr ""
-
 msgctxt "#32102"
 msgid "Token"
 msgstr ""
@@ -58,7 +54,7 @@ msgid "Show notifications"
 msgstr ""
 
 msgctxt "#32901"
-msgid "Please set your token"
+msgid "Please login"
 msgstr ""
 
 msgctxt "#32902"
@@ -82,11 +78,47 @@ msgid "Watched"
 msgstr ""
 
 msgctxt "#32907"
-msgid "Error 325324"
+msgid "Error 32907"
 msgstr ""
 
 msgctxt "#32908"
 msgid "Unwatched"
+msgstr ""
+
+msgctxt "#33801"
+msgid "Login"
+msgstr ""
+
+msgctxt "#33802"
+msgid "Logout"
+msgstr ""
+
+msgctxt "#33803"
+msgid "Synchronization"
+msgstr ""
+
+msgctxt "#33804"
+msgid "Error 33804"
+msgstr ""
+
+msgctxt "#33805"
+msgid "Logout ?"
+msgstr ""
+
+msgctxt "#33806"
+msgid "Go to"
+msgstr ""
+
+msgctxt "#33807"
+msgid "Enter the code"
+msgstr ""
+
+msgctxt "#33808"
+msgid "When it's done click 'ok'"
+msgstr ""
+
+msgctxt "#33809"
+msgid "Awaiting authorization"
 msgstr ""
 
 msgctxt "#33901"
