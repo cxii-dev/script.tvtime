@@ -4,7 +4,13 @@ script.tvshowtime
 Kodi plugin for [TVShow Time](http://www.tvshowtime.com)
 
 This plugin will set TV shows episodes you've seen as watched on TVShow Time.
-It will also add the new TV show to your account if it was not already there.
+It will also add the the TV show to your account if it was not already there.
+
+install
+=======
+
+This plugin has been submitted to the [official Kodi repository](http://addons.xbmc.org/show/script.tvshowtime/). 
+To install it, just follow this [HOW-TO](http://kodi.wiki/view/HOW-TO:Install_add-ons).
 
 build
 =====
@@ -36,15 +42,11 @@ rm -r $dest
 ````
 It will create a zip file that you can install directly within Kodi.
 
-install
-=======
-
 Using the GUI of Kodi, choose to install your plugin as a zip file, find your
-zip file, and you're done !
+zip file and it's done !
 
 download
 ========
-If you can't or don't want to build this plugin, look at the release tab.
-You can download the last plugin from there.
 
-[Download](here) the latests version.
+If you want to download the release package because you can't or don't want to build it, you can do it on this link :
+http://addons.xbmc.org/show/script.tvshowtime/
