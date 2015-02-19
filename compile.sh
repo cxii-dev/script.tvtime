@@ -1,9 +1,10 @@
 #!/bin/bash
+
 dest=script.tvshowtime
 version=$(grep -E "^\s+version" addon.xml | cut -f2 -d'"')
 
 if [ -d $dest ]; then
-rm -r $dest
+    rm -r $dest
 fi
 
 mkdir $dest
@@ -14,7 +15,7 @@ cp *.py $dest/
 cp -r resources $dest/
 
 if [ -f $dest-$version.zip ]; then
-rm $dest-$version.zip
+    rm $dest-$version.zip
 fi
 
 zip -r $dest-$version.zip $dest
