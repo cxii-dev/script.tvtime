@@ -9,7 +9,7 @@ It will also add the new TV show to your account if it was not already there.
 install
 =======
 
-This plugin has been submitted to the [official Kodi repository](http://addons.xbmc.org/show/script.tvshowtime/). 
+This plugin has been submitted to the [official Kodi repository](http://addons.xbmc.org/show/script.tvshowtime/).
 To install it, just follow this [HOW-TO](http://kodi.wiki/view/HOW-TO:Install_add-ons).
 
 build
@@ -20,7 +20,7 @@ If you want to build it manually, here is a simple script to do so:
 #!/bin/bash
 
 dest=script.tvshowtime
-version=$(grep -E "^\s\+version" addon.xml | cut -f2 -d'"')
+version=$(grep -E "^\s+version" addon.xml | cut -f2 -d'"')
 
 if [ -d $dest ]; then
     rm -r $dest
