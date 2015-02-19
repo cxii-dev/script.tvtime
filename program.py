@@ -16,6 +16,7 @@ from resources.lib.tvshowtime import Authorize
 from resources.lib.tvshowtime import IsChecked
 from resources.lib.tvshowtime import MarkAsWatched
 from resources.lib.tvshowtime import MarkAsUnWatched
+from resources.lib.tvshowtime import GetUserInformations
 
 __addon__         = xbmcaddon.Addon()
 __cwd__           = __addon__.getAddonInfo('path')
@@ -55,17 +56,20 @@ def start():
         first_step()
         
 def Authorization(verification_url, user_code, device_code):
-    activate = xbmcgui.Dialog().ok(__scriptname__, "%s: %s" % (__language__(33806), verification_url), "%s: %s" % (__language__(33807), user_code), __language__(33808)) 
-    if activate == True: 
-        notif(__language__(33809), time=5000)
-        xbmc.sleep(5000)
+    pDialog = xbmcgui.DialogProgress()
+    pDialog.create(__scriptname__, "%s: %s" % (__language__(33806), verification_url), "%s: %s" % (__language__(33807), user_code))
+    for i in range(0, 100):
+        pDialog.update(i)
+        xbmc.sleep(5000)  
+        if pDialog.iscanceled(): return
         _authorize = Authorize(device_code)
         if _authorize.is_authorized:
             __addon__.setSetting('token', _authorize.access_token)
+            user = GetUserInformations(_authorize.access_token)
+            if user.is_authenticated:
+                xbmcgui.Dialog().ok(__scriptname__, '%s %s' % (__language__(32902), user.username), __language__(33808))
             return
-        else:
-            Authorization(verification_url, user_code, device_code)
-    else: return
+    pDialog.close()
 
 def first_step():
     which_way = xbmcgui.Dialog().select(__language__(33901), ["TVShow Time > Kodi", "Kodi > TVShow Time"])
@@ -150,7 +154,6 @@ def scan(way, whattvshow = 0, whatseason = 0):
         for i in range(0, total):
             filename = '%s.S%sE%s' % (formatName(result['result']['episodes'][i]['showtitle']), result['result']['episodes'][i]['season'], result['result']['episodes'][i]['episode'])
             log('tvshowtitle=%s' % filename)
-            
             episode = IsChecked(__token__, filename)
             if episode.is_found:
                 log("episode.is_found=%s" % episode.is_found)
@@ -165,7 +168,7 @@ def scan(way, whattvshow = 0, whatseason = 0):
                     else:
                         checkin = MarkAsUnWatched(_token__, filename)
             pDialog.update(((100/total)*(i+1)), message=filename)
-            if ((i+1) % 10) == 0 and i < (total-1):
+            if ((i+1) % 5) == 0 and i < (total-1):
                 pDialog.update(((100/total)*(i+1)), message=__language__(33908))
                 xbmc.sleep(60000)
         pDialog.close()

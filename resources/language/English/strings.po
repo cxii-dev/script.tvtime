@@ -114,7 +114,7 @@ msgid "Enter the code"
 msgstr ""
 
 msgctxt "#33808"
-msgid "When it's done click 'ok'"
+msgid "You can now use TVShow Time Add-on"
 msgstr ""
 
 msgctxt "#33809"

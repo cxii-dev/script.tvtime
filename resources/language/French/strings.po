@@ -114,8 +114,8 @@ msgid "Enter the code"
 msgstr "Entrez le code"
 
 msgctxt "#33808"
-msgid "When it's done click 'ok'"
-msgstr "Quand c'est terminé, cliquez sur 'ok'"
+msgid "You can now use TVShow Time Add-on"
+msgstr "Vous pouvez dès à présent utiliser le plugin TVShow Time"
 
 msgctxt "#33809"
 msgid "Awaiting authorization"
