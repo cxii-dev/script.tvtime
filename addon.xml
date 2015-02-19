@@ -12,7 +12,7 @@
   <extension point="xbmc.service" library="default.py" start="startup"/>
   <extension point="xbmc.addon.metadata">
     <summary lang="en">TVShow Time</summary>
-    <description lang="en">Automatically set episodes as watched on tvshowtime.com - Can be done when watching the episode or from the contextual menu of the episode. You can also synchronize the whole or a part of library.</description>
+    <description lang="en">Automatically set episodes as watched on tvshowtime.com - Can be done when watching the episode or from the contextual menu of the episode. You can also synchronize the whole or a part of your library.</description>
     <description lang="fr">Marque automatiquement les épisodes comme vus sur tvshowtime.com - Peut être fait tout en regardant l'épisode ou via le menu contextuel de l'épisode. Vous pouvez aussi synchroniser l'entièreté ou une partie de votre librairie.</description>
     <platform>all</platform>
     <language>en fr</language>
