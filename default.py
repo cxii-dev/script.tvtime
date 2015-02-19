@@ -168,25 +168,26 @@ def formatName(filename):
     return filename	 
     
 def notif(msg, time=5000):
-    notif_msg = "%s, %s, %i, %s" % (__scriptname__, msg, time, __icon__)
-    xbmc.executebuiltin("XBMC.Notification(%s)" % notif_msg.encode('utf-8'))
+    xbmcgui.Dialog().notification(encode(__scriptname__), encode(msg), time=time, icon=__icon__)
 
 def log(msg):
-    xbmc.log("### [%s] - %s" % (__scriptname__, msg.encode('utf-8'), ),
+    xbmc.log("### [%s] - %s" % (__scriptname__, encode(msg), ),
             level=xbmc.LOGDEBUG) #100 #xbmc.LOGDEBUG
 
-def _is_excluded(filename):
-    log("_is_excluded(): Check if '%s' is a URL." % filename)
-    excluded_protocols = ["pvr://", "http://", "https://"]
-    return any(protocol in filename for protocol in excluded_protocols)
+def encode(string):
+    result = ''
+    try:
+        result = string.encode('UTF-8','replace')
+    except UnicodeDecodeError:
+        result = 'Unicode Error'
+    return result
 
 if ( __name__ == "__main__" ):
     player = Player()
     log("[%s] - Version: %s Started" % (__scriptname__, __version__))
-
     while not xbmc.abortRequested:
         xbmc.sleep(100)
-
-    self._monitor = None
+    player._monitor = None
     log("sys.exit(0)")
     sys.exit(0)
+    

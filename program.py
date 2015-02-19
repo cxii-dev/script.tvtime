@@ -35,8 +35,8 @@ def start():
     if __token__ is '':
         menuitems.append(__language__(33801))
     else:
-        menuitems.append(__language__(33802))
         menuitems.append(__language__(33803))
+        menuitems.append(__language__(33802))
     startmenu = xbmcgui.Dialog().select(__scriptname__, menuitems)
     if startmenu < 0: return
     elif startmenu == 0 and __token__ is '':
@@ -45,7 +45,7 @@ def start():
             Authorization(_login.verification_url, _login.user_code, _login.device_code)
         else:
             xbmcgui.Dialog().ok(__scriptname__, __language__(33804))
-    elif startmenu == 0:
+    elif startmenu == 1:
         logout = xbmcgui.Dialog().yesno(__scriptname__, __language__(33805))
         if logout == True:
             __addon__.setSetting('token', '')
@@ -182,11 +182,18 @@ def formatName(filename):
     return filename	 
     
 def notif(msg, time=5000):
-    notif_msg = "%s, %s, %i, %s" % (__scriptname__, msg, time, __icon__)
-    xbmc.executebuiltin("XBMC.Notification(%s)" % notif_msg.encode('utf-8'))
+    xbmcgui.Dialog().notification(encode(__scriptname__), encode(msg), time=time, icon=__icon__)
 
 def log(msg):
-    xbmc.log("### [%s] - %s" % (__scriptname__, msg.encode('utf-8'), ),
-            level=xbmc.LOGDEBUG) #100 #xbmc.LOGDEBUG           
+    xbmc.log("### [%s] - %s" % (__scriptname__, encode(msg), ),
+            level=xbmc.LOGDEBUG) #100 #xbmc.LOGDEBUG
+
+def encode(string):
+    result = ''
+    try:
+        result = string.encode('UTF-8','replace')
+    except UnicodeDecodeError:
+        result = 'Unicode Error'
+    return result         
 
 start()
