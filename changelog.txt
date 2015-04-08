@@ -1,3 +1,7 @@
+1.0.15
+add a setting to show or not notifications during playback - close #24
+change the api limitation to 30 according to exception from tvshowtime.com
+
 1.0.14
 change the way to authenticate due to api changes
 enhancements
