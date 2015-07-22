@@ -57,6 +57,8 @@ class Monitor(xbmc.Monitor):
                         if player.notifications:
                             if player.notif_during_playback == 'false' and player.isPlaying() == 1:
                                 return
+                            if player.notif_scrobbling == 'false'
+                                return
                             notif('%s %s %sx%s' % (__language__(32904), player.episode.showname, player.episode.season_number, player.episode.number), time=2500)
                     else:
                         if player.notifications:
@@ -95,6 +97,8 @@ class Monitor(xbmc.Monitor):
                                 if player.notifications:
                                     if player.notif_during_playback == 'false' and player.isPlaying() == 1:
                                         return
+                                    if player.notif_scrobbling == 'false'
+                                        return
                                     notif('%s %s %sx%s' % (__language__(32906), self.episode.showname, self.episode.season_number, self.episode.number), time=2500)
                                 else:
                                     if player.notifications:
@@ -108,6 +112,8 @@ class Monitor(xbmc.Monitor):
                             if checkin.is_unmarked:
                                 if player.notifications:
                                     if player.notif_during_playback == 'false' and player.isPlaying() == 1:
+                                        return
+                                    if player.notif_scrobbling == 'false'
                                         return
                                     notif('%s %s %sx%s' % (__language__(32908), self.episode.showname, self.episode.season_number, self.episode.number), time=2500)
                                 else:
@@ -149,6 +155,7 @@ class Player(xbmc.Player):
         self.twitter = __addon__.getSetting('twitter')
         self.notifications = __addon__.getSetting('notifications')
         self.notif_during_playback = __addon__.getSetting('notif_during_playback')
+        self.notif_scrobbling = __addon__.getSetting('notif_scrobbling')
         if self.token is '':
             log(__language__(32901))
             notif(__language__(32901), time=2500)
