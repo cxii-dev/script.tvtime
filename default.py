@@ -57,7 +57,7 @@ class Monitor(xbmc.Monitor):
                         if player.notifications:
                             if player.notif_during_playback == 'false' and player.isPlaying() == 1:
                                 return
-                            if player.notif_scrobbling == 'false'
+                            if player.notif_scrobbling == 'false':
                                 return
                             notif('%s %s %sx%s' % (__language__(32904), player.episode.showname, player.episode.season_number, player.episode.number), time=2500)
                     else:
@@ -97,7 +97,7 @@ class Monitor(xbmc.Monitor):
                                 if player.notifications:
                                     if player.notif_during_playback == 'false' and player.isPlaying() == 1:
                                         return
-                                    if player.notif_scrobbling == 'false'
+                                    if player.notif_scrobbling == 'false':
                                         return
                                     notif('%s %s %sx%s' % (__language__(32906), self.episode.showname, self.episode.season_number, self.episode.number), time=2500)
                                 else:
@@ -113,7 +113,7 @@ class Monitor(xbmc.Monitor):
                                 if player.notifications:
                                     if player.notif_during_playback == 'false' and player.isPlaying() == 1:
                                         return
-                                    if player.notif_scrobbling == 'false'
+                                    if player.notif_scrobbling == 'false':
                                         return
                                     notif('%s %s %sx%s' % (__language__(32908), self.episode.showname, self.episode.season_number, self.episode.number), time=2500)
                                 else:
