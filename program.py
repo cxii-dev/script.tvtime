@@ -166,7 +166,7 @@ def scan(way, whattvshow = 0, whatseason = 0):
             if result['result']['episodes'][i]['playcount'] == 1:
                 checkin = MarkAsWatched(__token__, filename, __facebook__, __twitter__)
             else:
-                checkin = MarkAsUnWatched(_token__, filename)
+                checkin = MarkAsUnWatched(__token__, filename)
             pDialog.update(((100/total)*(i+1)), message=filename)
             if ((i+1) % 30) == 0 and i < (total-1):
                 pDialog.update(((100/total)*(i+1)), message=__language__(33908))

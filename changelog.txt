@@ -1,3 +1,6 @@
+1.0.17
+bug fix - close #27
+
 1.0.16
 add a 'Show notification on scrobble' setting
 
