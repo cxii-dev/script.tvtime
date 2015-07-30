@@ -1,3 +1,6 @@
+1.0.18
+change the start point for profiles' users - close #28
+
 1.0.17
 bug fix - close #27
 
