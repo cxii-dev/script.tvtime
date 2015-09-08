@@ -182,7 +182,7 @@ def formatNumber(number):
 def formatName(filename):
     filename = filename.strip()
     filename = filename.replace(' ', '.')
-    return filename	 
+    return normalizeString(filename)
     
 def notif(msg, time=5000):
     xbmcgui.Dialog().notification(encode(__scriptname__), encode(msg), time=time, icon=__icon__)
@@ -198,5 +198,8 @@ def encode(string):
     except UnicodeDecodeError:
         result = 'Unicode Error'
     return result         
+
+def normalizeString(str):
+    return unicodedata.normalize('NFKD', str).encode('ascii','ignore').encode('UTF-8','replace')
 
 start()
