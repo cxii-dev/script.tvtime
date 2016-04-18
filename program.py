@@ -351,17 +351,17 @@ def notif(msg, time=5000):
 
 def log(msg):
     xbmc.log("### [%s] - %s" % (__scriptname__, encode(msg), ),
-            level=100) #100 #xbmc.LOGDEBUG
+            level=xbmc.LOGDEBUG) #100 #xbmc.LOGDEBUG
 
 def encode(string):
     result = ''
     try:
-        result = string.encode('Unicode','replace')
+        result = string.encode('UTF-8','replace')
     except UnicodeDecodeError:
-        result = 'Unicode Error'
+        result = 'UTF-8 Error'
     return result         
 
 def normalizeString(str):
-    return unicodedata.normalize('NFKD', str).encode('ascii','ignore').encode('Unicode','replace')
+    return unicodedata.normalize('NFKD', str).encode('ascii','ignore').encode('UTF-8','replace')
 
 start()

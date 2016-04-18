@@ -49,6 +49,7 @@ class FindEpisode(object):
            self.episodename = data['episode']['name']
            self.season_number = data['episode']['season_number']
            self.number = data['episode']['number']
+           self.id = data['episode']['id']
            
 class Show(object):
     def __init__(self, token, show_id):

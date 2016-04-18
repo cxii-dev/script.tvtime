@@ -138,15 +138,15 @@ class Monitor(xbmc.Monitor):
                     log('episode.is_found=%s' % player.episode.is_found)
                     if player.episode.is_found:
                         log('progress=%s' % self._last_pos)
-                        self.progress = SaveProgress(player.token, player.episode.number, self._last_pos)   
+                        self.progress = SaveProgress(player.token, player.episode.id, self._last_pos)   
                         log('progress.is_set:=%s' % self.progress.is_set)  
                         if actual_percent > 90:
                             log('MarkAsWatched(*, %s, %s, %s)' % (player.filename, player.facebook, player.twitter))
-                            checkin = MarkAsWatched(player.token, player.episode.number, player.facebook, player.twitter)
+                            checkin = MarkAsWatched(player.token, player.episode.id, player.facebook, player.twitter)
                             log('checkin.is_marked:=%s' % checkin.is_marked)
                             if checkin.is_marked:
                                 if player.emotion == 'true':
-                                    self.emotion = xbmcgui.Dialog().select('%s: %s' % (__language__(33909), player.filename), [__language__(35311), __language__(35312), __language__(35313), __language__(35314), __language__(35316), __language__(35317)])
+                                    self.emotion = xbmcgui.Dialog().select('%s: %s %sx%s' % (__language__(33909), player.episode.showname, player.episode.season_number, player.episode.number), [__language__(35311), __language__(35312), __language__(35313), __language__(35314), __language__(35316), __language__(35317)])
                                     if self.emotion < 0: return
                                     if self.emotion == 0:
                                         self.emotion = 1
@@ -160,7 +160,7 @@ class Monitor(xbmc.Monitor):
                                         self.emotion = 6
                                     elif self.emotion == 5:
                                         self.emotion = 7
-                                    SetEmotion(player.token, player.episode.number, self.emotion)
+                                    SetEmotion(player.token, player.episode.id, self.emotion)
                                 if player.notifications == 'true':
                                     if player.notif_during_playback == 'false' and player.isPlaying() == 1:
                                         return
@@ -346,11 +346,11 @@ def encode(string):
     try:
         result = string.encode('UTF-8','replace')
     except UnicodeDecodeError:
-        result = 'Unicode Error'
+        result = 'UTF-8 Error'
     return result
 
 def normalizeString(str):
-    return unicodedata.normalize('NFKD', str).encode('ascii','ignore').encode('Unicode','replace')
+    return unicodedata.normalize('NFKD', str).encode('ascii','ignore').encode('UTF-8','replace')
 
 if ( __name__ == "__main__" ):
     player = Player()
