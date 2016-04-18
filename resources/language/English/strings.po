@@ -37,6 +37,10 @@ msgctxt "#32302"
 msgid "Save watched episode's progress"
 msgstr ""
 
+msgctxt "#32303"
+msgid "Mark the http streams"
+msgstr ""
+
 msgctxt "#33001"
 msgid "Notifications"
 msgstr ""

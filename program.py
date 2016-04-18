@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: unicode -*-
+# -*- coding: utf-8 -*-
 
 import os
 import re

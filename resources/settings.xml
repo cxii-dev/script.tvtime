@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="unicode" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <settings>
    <category label="32001">
 	   <setting id="token" type="text" label="token" default="" visible="false" />
 	   <setting id="user" type="text" label="32301" enable="false" />
 	   <setting id="progress" type="bool" label="32302" default="true" />
+	   <setting id="http" type="bool" label="32303" default="false" />
 	</category>
 	<category label="33001">  
 	   <setting id="notifications" type="bool" label="33301" default="true" />

@@ -9,10 +9,15 @@ import json
 request_uri = "https://api.tvshowtime.com/v1/"
 
 class FindEpisode(object):
-    def __init__(self, token, episode_id):
+    def __init__(self, token, episode_id, filename=''):
         self.token = token
         self.episode_id = episode_id
-        self.action = 'episode?access_token=%s&episode_id=%s' % (self.token, self.episode_id)
+        self.filename = filename
+        if len(self.filename) > 0:
+            self.action = 'episode?access_token=%s&filename=%s' % (self.token, self.filename)
+        else:
+            self.action = 'episode?access_token=%s&episode_id=%s' % (self.token, self.episode_id)
+        
 
         self.cj = cookielib.CookieJar()
         self.opener = urllib2.build_opener(
