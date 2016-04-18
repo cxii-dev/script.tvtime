@@ -76,7 +76,7 @@ class Monitor(xbmc.Monitor):
             self._total_time = player.getTotalTime()
             self._tracker.start()
             log('Player.OnPlay')
-            if player.http == 'true' and player.getPlayingFile()[:4] == 'http' :
+            if player.http == 'true' and player.getPlayingFile()[:4] == 'http' and re.search(r'[sS][0-9]*[eE][0-9]*', os.path.basename(player.getPlayingFile()), flags=0) :
                 player.http_playing = True
                 player.filename = os.path.basename(player.getPlayingFile())
                 log('tvshowtitle=%s' % player.filename)
