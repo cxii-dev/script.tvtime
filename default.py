@@ -79,6 +79,9 @@ class Monitor(xbmc.Monitor):
             if player.http == 'true' and player.getPlayingFile()[:4] == 'http' and re.search(r'[sS][0-9]*[eE][0-9]*', os.path.basename(player.getPlayingFile()), flags=0) :
                 player.http_playing = True
                 player.filename = os.path.basename(player.getPlayingFile())
+                player.filename = player.filename[player.filename.find("%5D"):]
+                player.filename = player.filename.replace("%5D", "")
+                player.filename = player.filename.replace("%20", ".")
                 log('tvshowtitle=%s' % player.filename)
                 player.episode = FindEpisode(player.token, 0, player.filename)
                 log('episode.is_found=%s' % player.episode.is_found)
