@@ -1,6 +1,3 @@
-1.1.2
-Try to bypass the links in some http streams 
-
 1.1.1
 Add the possibility to mark the http streams
 
