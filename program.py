@@ -326,11 +326,11 @@ def setTvshowProgress(show_id, last_season_seen, last_episode_seen):
                 episodes = episodes['result']['episodes']
                 for episode in episodes:
                     log('episode=%s' % episode) 
-                    if (episode['season'] <= last_season_seen and episode['episode'] <= last_episode_seen):               
+                    if (episode['season'] < last_season_seen or (episode['season'] == last_season_seen and episode['episode'] <= last_episode_seen)):
                         command2 = '{"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetEpisodeDetails", "params": {"episodeid" : %s, "playcount": %s}}' % (episode['episodeid'], 1)
                         result2 = json.loads(xbmc.executeJSONRPC(command2))
                         log('watched=%s' % 1)
-                    else:         
+                    else:
                         command2 = '{"jsonrpc": "2.0", "id": 1, "method": "VideoLibrary.SetEpisodeDetails", "params": {"episodeid" : %s, "playcount": %s}}' % (episode['episodeid'], 0)
                         result2 = json.loads(xbmc.executeJSONRPC(command2))
                         log('watched=%s' % 0)
