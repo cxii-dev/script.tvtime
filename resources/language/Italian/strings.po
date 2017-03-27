@@ -1,0 +1,214 @@
+# XBMC Media Center language file
+# Addon Name: TVShow Time
+# Addon id: script.tvshowtime
+# Addon version: 1.0.7
+# Addon Provider: CXII
+msgid ""
+msgstr ""
+"Project-Id-Version: XBMC-Addons\n"
+"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
+"POT-Creation-Date: 2017-03-25 01:02+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=Unicode\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+msgctxt "Sintesi Addon"
+msgid "TVShow Time"
+msgstr "TVShow Time"
+
+msgctxt "Descrizione Addon"
+msgid "Automatically set episodes as watched on TVShowTime.com"
+msgstr "Imposta automaticamente gli episodi come visti su TVShowTime.com"
+
+msgctxt "#32001"
+msgid "General"
+msgstr "Generale"
+
+msgctxt "#32301"
+msgid "User"
+msgstr "Utente"
+
+msgctxt "#32302"
+msgid "Save watched episode's progress"
+msgstr "Salva il progresso dell'episodio guardato"
+
+msgctxt "#32303"
+msgid "Mark the http streams"
+msgstr "Segna i flussi http"
+
+msgctxt "#33001"
+msgid "Notifications"
+msgstr "Notifiche"
+
+msgctxt "#33301"
+msgid "Show notifications"
+msgstr "Mostra notifiche"
+
+msgctxt "#33302"
+msgid "Say welcome"
+msgstr "Mostra Benvenuto"
+
+msgctxt "#33303"
+msgid "Show during playback"
+msgstr "Mostra durante la riproduzione"
+
+msgctxt "#33304"
+msgid "Show notification on scrobble"
+msgstr "Mostra notifica su scrobble"
+
+msgctxt "#34001"
+msgid "Social networks"
+msgstr "Social networks"
+
+msgctxt "#34301"
+msgid "Publish on Facebook"
+msgstr "Pubblica su Facebook"
+
+msgctxt "#34302"
+msgid "Publish on Twitter"
+msgstr "Pubblica su Twitter"
+
+msgctxt "#35001"
+msgid "Emotions"
+msgstr "Emozioni"
+
+msgctxt "#35301"
+msgid "Set Emotion after watching"
+msgstr "Imposta emozione dopo aver guardato l'episodio"
+
+msgctxt "#35302"
+msgid "Default Emotion"
+msgstr "Emozione di default"
+
+msgctxt "#35311"
+msgid "Good"
+msgstr "Buono"
+
+msgctxt "#35312"
+msgid "Funk"
+msgstr "Paura"
+
+msgctxt "#35313"
+msgid "Wow"
+msgstr "Wow"
+
+msgctxt "#35314"
+msgid "Sad"
+msgstr "Triste"
+
+msgctxt "#35316"
+msgid "Soso"
+msgstr "CosìCosì"
+
+msgctxt "#35317"
+msgid "Bad"
+msgstr "Brutto"
+
+msgctxt "#32901"
+msgid "Please login"
+msgstr "Esegui il login"
+
+msgctxt "#32902"
+msgid "Welcome"
+msgstr "Benvenuto"
+
+msgctxt "#32903"
+msgid "Error - Please check your authentication informations"
+msgstr "Errore - Verifica le informazioni della tua autenticazione"
+
+msgctxt "#32904"
+msgid "Watching"
+msgstr "Guardando"
+
+msgctxt "#32905"
+msgid "Episode not found"
+msgstr "Episodio non trovato"
+
+msgctxt "#32906"
+msgid "Watched"
+msgstr "Visto"
+
+msgctxt "#32907"
+msgid "Error 32907"
+msgstr "Errore 32907"
+
+msgctxt "#32908"
+msgid "Unwatched"
+msgstr "Non visto"
+
+msgctxt "#33801"
+msgid "Login"
+msgstr "Login"
+
+msgctxt "#33802"
+msgid "Logout"
+msgstr "Disconnettiti"
+
+msgctxt "#33803"
+msgid "Synchronization"
+msgstr "Sincronizza"
+
+msgctxt "#33804"
+msgid "Error 33804"
+msgstr "Errore 33804"
+
+msgctxt "#33805"
+msgid "Logout ?"
+msgstr "Disconnettersi ?"
+
+msgctxt "#33806"
+msgid "Go to"
+msgstr "Vai a"
+
+msgctxt "#33807"
+msgid "Enter the code"
+msgstr "Inserisci il codice"
+
+msgctxt "#33808"
+msgid "You can now use TVShow Time Add-on"
+msgstr "Ora puoi usare l'add-on TVShow Time"
+
+msgctxt "#33809"
+msgid "Awaiting authorization"
+msgstr "In attesa dell'autorizzazione"
+
+msgctxt "#33901"
+msgid "In which way ?"
+msgstr "In che modo ?"
+
+msgctxt "#33902"
+msgid "Whole TVShows"
+msgstr "Intere Serie TV"
+
+msgctxt "#33903"
+msgid "What sync ?"
+msgstr "Quale sincronizzare ?"
+
+msgctxt "#33904"
+msgid "Whole Seasons"
+msgstr "Intere stagioni"
+
+msgctxt "#33905"
+msgid "What season ?"
+msgstr "Quale stagione ?"
+
+msgctxt "#33906"
+msgid "Initialising"
+msgstr "Inizializzazione"
+
+msgctxt "#33907"
+msgid "Finished"
+msgstr "Finito"
+
+msgctxt "#33908"
+msgid "Syncing"
+msgstr "Sincronizzazione"
+
+msgctxt "#33909"
+msgid "Set Emotion"
+msgstr "Imposta Emozione"
