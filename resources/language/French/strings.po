@@ -91,11 +91,11 @@ msgstr "Bien"
 
 msgctxt "#35312"
 msgid "Funk"
-msgstr "Effrayant"
+msgstr "Fun"
 
 msgctxt "#35313"
 msgid "Wow"
-msgstr "Sensationnel"
+msgstr "Wow"
 
 msgctxt "#35314"
 msgid "Sad"
