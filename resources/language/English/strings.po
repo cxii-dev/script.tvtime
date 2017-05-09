@@ -1,6 +1,6 @@
 # XBMC Media Center language file
-# Addon Name: TVShow Time
-# Addon id: script.tvshowtime
+# Addon Name: TV Time
+# Addon id: script.tvtime
 # Addon version: 1.0.7
 # Addon Provider: CXII
 msgid ""
@@ -18,11 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgctxt "Addon Summary"
-msgid "TVShow Time"
+msgid "TV Time"
 msgstr ""
 
 msgctxt "Addon Description"
-msgid "Automatically set episodes as watched on TVShowTime.com"
+msgid "Automatically set episodes as watched on TVTime.com"
 msgstr ""
 
 msgctxt "#32001"
@@ -162,7 +162,7 @@ msgid "Logout ?"
 msgstr ""
 
 msgctxt "#33806"
-msgid "TVShow Time Authorization"
+msgid "TV Time Authorization"
 msgstr ""
 
 msgctxt "#33807"
@@ -170,7 +170,7 @@ msgid "Enter the code"
 msgstr ""
 
 msgctxt "#33808"
-msgid "You can now use TVShow Time Add-on"
+msgid "You can now use TV Time Add-on"
 msgstr ""
 
 msgctxt "#33809"

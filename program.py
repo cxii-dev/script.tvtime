@@ -11,19 +11,19 @@ import xbmcaddon
 import unicodedata
 import json
 
-from resources.lib.tvshowtime import GetCode
-from resources.lib.tvshowtime import Authorize
-from resources.lib.tvshowtime import IsChecked
-from resources.lib.tvshowtime import MarkAsWatched
-from resources.lib.tvshowtime import MarkAsUnWatched
-from resources.lib.tvshowtime import GetUserInformations
-from resources.lib.tvshowtime import SaveShowProgress
-from resources.lib.tvshowtime import SaveShowsProgress
-from resources.lib.tvshowtime import Show
-from resources.lib.tvshowtime import GetLibrary
-from resources.lib.tvshowtime import DeleteShowProgress
-from resources.lib.tvshowtime import DeleteShowsProgress
-from resources.lib.tvshowtime import FollowShows
+from resources.lib.tvtime import GetCode
+from resources.lib.tvtime import Authorize
+from resources.lib.tvtime import IsChecked
+from resources.lib.tvtime import MarkAsWatched
+from resources.lib.tvtime import MarkAsUnWatched
+from resources.lib.tvtime import GetUserInformations
+from resources.lib.tvtime import SaveShowProgress
+from resources.lib.tvtime import SaveShowsProgress
+from resources.lib.tvtime import Show
+from resources.lib.tvtime import GetLibrary
+from resources.lib.tvtime import DeleteShowProgress
+from resources.lib.tvtime import DeleteShowsProgress
+from resources.lib.tvtime import FollowShows
 
 __addon__         = xbmcaddon.Addon()
 __cwd__           = __addon__.getAddonInfo('path')
@@ -84,7 +84,7 @@ def Authorization(verification_url, user_code, device_code):
     pDialog.close()
 
 def first_step():
-    which_way = xbmcgui.Dialog().select(__language__(33901), ["TVShow Time > Kodi", "Kodi > TVShow Time"])
+    which_way = xbmcgui.Dialog().select(__language__(33901), ["TV Time > Kodi", "Kodi > TV Time"])
     if which_way < 0: return
     scan(which_way)
     return
@@ -129,9 +129,9 @@ def scan(way):
     emotion = __addon__.getSetting('emotion')
     __addon__.setSetting('emotion', 'false')
     if way == 1:
-        log('Kodi > TVShow Time')  
+        log('Kodi > TV Time')  
         pDialog = xbmcgui.DialogProgressBG()
-        pDialog.create('Kodi > TVShow Time', __language__(33906))
+        pDialog.create('Kodi > TV Time', __language__(33906))
         pDialog.update(0, message=__language__(33906))
         tvshowsList = getTvshowList()
         showsSeen = []
@@ -208,11 +208,11 @@ def scan(way):
                 follow_shows = FollowShows(__token__, json.dumps(tempShowsNotSeen))
                 log("follow_shows.is_follow=%s" % follow_shows.is_follow)
         pDialog.update(100, message=__language__(33907))
-        xbmcgui.Dialog().ok("Kodi > TVShow Time", __language__(33907))  
+        xbmcgui.Dialog().ok("Kodi > TV Time", __language__(33907))  
     else:
-        log('TVShow Time > Kodi') 
+        log('TV Time > Kodi') 
         pDialog = xbmcgui.DialogProgressBG()
-        pDialog.create('TVShow Time > Kodi', __language__(33906))
+        pDialog.create('TV Time > Kodi', __language__(33906))
         pDialog.update(0, message=__language__(33906))
         tvshowList = getTvshowList()
         tvshowTimeList = getTvshowTimeList()
@@ -225,7 +225,7 @@ def scan(way):
                         log('setTvshowProgress(%s, %s, %s)' % (tvshowTime['show_id'], tvshowTime['season'], tvshowTime['episode']))
                         tvshowProgress = setTvshowProgress(tvshowTime['show_id'], tvshowTime['season'], tvshowTime['episode'])
         pDialog.update(100, message=__language__(33907))
-        xbmcgui.Dialog().ok("TVShow Time > Kodi", __language__(33907)) 
+        xbmcgui.Dialog().ok("TV Time > Kodi", __language__(33907)) 
     __addon__.setSetting('emotion', emotion)
     pDialog.close() 
         

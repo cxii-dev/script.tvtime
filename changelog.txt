@@ -1,6 +1,8 @@
+1.2.0
+Rebranded to "TV Time"
+
 1.1.2
 Bypass the links in some http streams 
-
 
 1.1.1
 Add the possibility to mark the http streams

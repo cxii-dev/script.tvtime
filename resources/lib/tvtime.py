@@ -6,7 +6,7 @@ import re
 import urllib, urllib2
 import json
 
-request_uri = "https://api.tvshowtime.com/v1/"
+request_uri = "https://api.tvtime.com/v1/"
 
 class FindEpisode(object):
     def __init__(self, token, episode_id, filename=''):

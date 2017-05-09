@@ -22,12 +22,12 @@ __resource_path__ = os.path.join(__cwd__, 'resources', 'lib')
 __resource__      = xbmc.translatePath(__resource_path__).decode('utf-8')
 __notifications__ = __addon__.getSetting('notifications')
 
-from resources.lib.tvshowtime import FindEpisode
-from resources.lib.tvshowtime import MarkAsWatched
-from resources.lib.tvshowtime import MarkAsUnWatched
-from resources.lib.tvshowtime import GetUserInformations
-from resources.lib.tvshowtime import SaveProgress
-from resources.lib.tvshowtime import SetEmotion
+from resources.lib.tvtime import FindEpisode
+from resources.lib.tvtime import MarkAsWatched
+from resources.lib.tvtime import MarkAsUnWatched
+from resources.lib.tvtime import GetUserInformations
+from resources.lib.tvtime import SaveProgress
+from resources.lib.tvtime import SetEmotion
 
 class Monitor(xbmc.Monitor):
     def __init__( self, *args, **kwargs ):

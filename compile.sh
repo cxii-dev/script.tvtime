@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dest=script.tvshowtime
+dest=script.tvtime
 version=$(grep -E "^\s+version" addon.xml | cut -f2 -d'"')
 
 if [ -d $dest ]; then
