@@ -1,7 +1,7 @@
 script.tvtime
 =================
 
-Kodi plugin for [TVShow Time](http://www.tvtime.com)
+Kodi plugin for [TV Time](http://www.tvtime.com)
 
 This plugin will set TV shows episodes you've seen as watched on TVShow Time.
 It will also add the new TV show to your account if it was not already there.
