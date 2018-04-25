@@ -91,7 +91,7 @@ msgstr "Bien"
 
 msgctxt "#35312"
 msgid "Funk"
-msgstr "Fun"
+msgstr "Drole"
 
 msgctxt "#35313"
 msgid "Wow"
@@ -99,15 +99,15 @@ msgstr "Wow"
 
 msgctxt "#35314"
 msgid "Sad"
-msgstr "triste"
+msgstr "Triste"
 
 msgctxt "#35316"
 msgid "Soso"
-msgstr "Mitigé"
+msgstr "Bof"
 
 msgctxt "#35317"
 msgid "Bad"
-msgstr "Mauvais"
+msgstr "Nul"
 
 msgctxt "#32901"
 msgid "Please login"
