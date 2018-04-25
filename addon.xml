@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="script.tvtime"
        name="TV Time"
-       version="1.2.0"
-       provider-name="CXII">
+       version="1.2.1"
+       provider-name="alxlaxv">
   <requires>
     <import addon="xbmc.python" version="2.19.0"/>
   </requires>
@@ -19,9 +19,9 @@
     <language>en fr it</language>
     <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
     <forum>http://forum.kodi.tv/showthread.php?tid=199604</forum>
-    <website>https://github.com/cxii-dev/script.tvtime</website>
-    <source>https://github.com/cxii-dev/script.tvtime.git</source>
-    <email>cxii-dev[AT]users[DOT]noreply[DOT]github[DOT]com</email>
+    <website>https://github.com/alxlaxv/script.tvtime</website>
+    <source>https://github.com/alxlaxv/script.tvtime.git</source>
+    <email>alxlaxv[AT]users[DOT]noreply[DOT]github[DOT]com</email>
   </extension>
 </addon>
 
