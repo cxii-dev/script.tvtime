@@ -264,17 +264,25 @@ class Monitor(xbmc.Monitor):
         rpccmd = {'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {"episodeid": int(xbmc_id), 'properties': ['season', 'episode', 'tvshowid', 'showtitle', 'uniqueid']}, 'id': 1}
         rpccmd = json.dumps(rpccmd)
         result = xbmc.executeJSONRPC(rpccmd)
-        result = json.loads(result)        
-        log('result=%s' % result)    
-        log('episode_id=%s' % result['result']['episodedetails']['uniqueid']['unknown'])
-        
+        result = json.loads(result)
+        log('result=%s' % result)
+        if 'unknown' in result['result']['episodedetails']['uniqueid']:
+            episode_id = result['result']['episodedetails']['uniqueid']['unknown']
+        if 'imdb' in result['result']['episodedetails']['uniqueid']:
+            episode_id = result['result']['episodedetails']['uniqueid']['imdb']
+        if 'tvdb' in result['result']['episodedetails']['uniqueid']:
+            episode_id = result['result']['episodedetails']['uniqueid']['tvdb']
+        else:
+            return False
+        log('episode_id=%s' % episode_id)
+
         try:
             item = {}
             item['season'] = result['result']['episodedetails']['season']
             item['tvshowid'] = result['result']['episodedetails']['tvshowid']
             item['episode'] = result['result']['episodedetails']['episode']
             item['showtitle'] = result['result']['episodedetails']['showtitle']
-            item['episode_id'] = result['result']['episodedetails']['uniqueid']['unknown']
+            item['episode_id'] = episode_id
             return item
         except:
             return False
@@ -367,4 +375,3 @@ if ( __name__ == "__main__" ):
     player._monitor = None
     log("sys.exit(0)")
     sys.exit(0)
-    
