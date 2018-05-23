@@ -1,53 +1,25 @@
-script.tvtime
-=================
+# script.tvtime
 
 Kodi plugin for [TV Time](http://www.tvtime.com)
 
 This plugin will set TV shows episodes you've seen as watched on TV Time.
 It will also add the new TV show to your account if it was not already there.
 
-install
-=======
+This fork has been created to be able to apply some fixes on the initial repository (hibernating/dead) but it will never be  submitted to the official Kodi repository.
+Please follow Build or Download steps below to install this version.
 
-This plugin has been submitted to the [official Kodi repository](http://addons.xbmc.org/show/script.tvtime/).
-To install it, just follow this [HOW-TO](http://kodi.wiki/view/HOW-TO:Install_add-ons).
-After that, launch the add-on to login.
+## Build
 
-build
-=====
+If you want to build it manually, please follow the steps below:
 
-If you want to build it manually, here is a simple script to do so:
-```sh
-#!/bin/bash
+1. Clone this repository `sudo git clone https://github.com/alxlaxv/script.tvtime.git`
+2. Enter in script.tvtime `cd script.tvtime`
+3. Make the compile script executable `sudo chmod +x compile.sh`
+4. Launch the compile script `./compile.sh`
 
-dest=script.tvtime
-version=$(grep -E "^\s+version" addon.xml | cut -f2 -d'"')
+It will create a zip file which can be installed directly within Kodi by following this [HOW-TO](https://kodi.wiki/view/Add-on_manager#How_to_install_from_a_ZIP_file).
 
-if [ -d $dest ]; then
-    rm -r $dest
-fi
+## Download
 
-mkdir $dest
-cp addon.xml $dest/
-cp *.txt $dest/
-cp icon.png $dest/
-cp *.py $dest/
-cp -r resources $dest/
-
-if [ -f $dest-$version.zip ]; then
-    rm $dest-$version.zip
-fi
-
-zip -r $dest-$version.zip $dest
-rm -r $dest
-````
-It will create a zip file that you can install directly within Kodi.
-Using the GUI of Kodi, choose to install your plugin as a zip file, find your zip file and it's done !
-
-download
-========
-
-If you want to download the release package because you can't or don't want to build it, you can do it on this link:
-http://addons.xbmc.org/show/script.tvtime/
-or
-[download](here) the latests version.
+You can down the [last release](https://github.com/alxlaxv/script.tvtime/releases/latest) directly.
+It will download a zip file which can be installed directly within Kodi by following this [HOW-TO](https://kodi.wiki/view/Add-on_manager#How_to_install_from_a_ZIP_file).
