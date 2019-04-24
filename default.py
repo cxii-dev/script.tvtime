@@ -268,8 +268,6 @@ class Monitor(xbmc.Monitor):
         log('result=%s' % result)
         if 'unknown' in result['result']['episodedetails']['uniqueid']:
             episode_id = result['result']['episodedetails']['uniqueid']['unknown']
-        elif 'imdb' in result['result']['episodedetails']['uniqueid']:
-            episode_id = result['result']['episodedetails']['uniqueid']['imdb']
         elif 'tvdb' in result['result']['episodedetails']['uniqueid']:
             episode_id = result['result']['episodedetails']['uniqueid']['tvdb']
         else:
