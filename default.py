@@ -136,7 +136,10 @@ class Monitor(xbmc.Monitor):
                             notif(__language__(32905), time=2500)              
         if (method == 'Player.OnStop'): 
             self._tearDown()
-            actual_percent = (self._last_pos/self._total_time)*100
+            if self._total_time > 0:
+                actual_percent = (self._last_pos/self._total_time)*100
+            else:
+                actual_percent = 0;
             log('last_pos / total_time : %s / %s = %s %%' % (self._last_pos, self._total_time, actual_percent)) 
             log('Player.OnStop') 
             if player.http == 'true' and player.http_playing == True :
