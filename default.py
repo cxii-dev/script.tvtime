@@ -205,11 +205,16 @@ class Monitor(xbmc.Monitor):
                 log('episode=%s' % item['episode'])
                 log('episode_id=%s' % item['episode_id'])
                 log('playcount=%s' % playcount)
-                if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0 and item['episode_id'] > 0:
+                if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0:
                     self.filename = '%s.S%.2dE%.2d' % (formatName(item['showtitle']), float(item['season']), float(item['episode']))
                     log('tvshowtitle=%s' % self.filename)
                     self.episode = FindEpisode(player.token, item['episode_id'])
-                    log('episode.is_found=%s' % self.episode.is_found)
+                    log('Is episode find with Episode_id  :%s' % self.episode.is_found)
+                    if not self.episode.is_found:
+                        self.episode = FindEpisode(player.token,0, self.filename);
+                        item['episode_id'] = self.episode.id
+                    log('Is episode find with Filename  :%s' % self.episode.is_found)
+
                     if self.episode.is_found:
                         if playcount is 1:
                             log('MarkAsWatched(*, %s, %s, %s)' % (self.filename, player.facebook, player.twitter))
@@ -259,19 +264,21 @@ class Monitor(xbmc.Monitor):
                                     if player.notif_during_playback == 'false' and player.isPlaying() == 1:
                                         return
                                     notif(__language__(32907), time=2500)
+                                    
 
     def getEpisodeTVDB(self, xbmc_id):
         rpccmd = {'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {"episodeid": int(xbmc_id), 'properties': ['season', 'episode', 'tvshowid', 'showtitle', 'uniqueid']}, 'id': 1}
         rpccmd = json.dumps(rpccmd)
         result = xbmc.executeJSONRPC(rpccmd)
         result = json.loads(result)
-        log('result=%s' % result)
+        log('resulto=%s' % result)
+        
         if 'unknown' in result['result']['episodedetails']['uniqueid']:
             episode_id = result['result']['episodedetails']['uniqueid']['unknown']
-        if 'tvdb' in result['result']['episodedetails']['uniqueid']:
+        elif 'tvdb' in result['result']['episodedetails']['uniqueid']:
             episode_id = result['result']['episodedetails']['uniqueid']['tvdb']
         else:
-            return False
+            episode_id = 0
         log('episode_id=%s' % episode_id)
 
         try:
