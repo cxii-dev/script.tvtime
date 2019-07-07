@@ -112,11 +112,16 @@ class Monitor(xbmc.Monitor):
                     log('season=%s' % item['season'])
                     log('episode=%s' % item['episode'])
                     log('episode_id=%s' % item['episode_id'])
-                    if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0 and item['episode_id'] > 0:                   
+                    if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0:                   
                         player.filename = '%s.S%.2dE%.2d' % (formatName(item['showtitle']), float(item['season']), float(item['episode']))
                         log('tvshowtitle=%s' % player.filename)
                         player.episode = FindEpisode(player.token, item['episode_id'])
-                        log('episode.is_found=%s' % player.episode.is_found)
+                        log('Is episode find with Episode_id  :%s' % player.episode.is_found)
+                        if not player.episode.is_found:
+                            player.episode = FindEpisode(player.token,0, player.filename);
+                            item['episode_id'] = self.episode.id
+                        log('Is episode find with Filename  :%s' % player.episode.is_found)
+
                         if player.episode.is_found:
                             if player.notifications == 'true':                        
                                 if player.notif_during_playback == 'false' and player.isPlaying() == 1:
