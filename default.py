@@ -112,11 +112,16 @@ class Monitor(xbmc.Monitor):
                     log('season=%s' % item['season'])
                     log('episode=%s' % item['episode'])
                     log('episode_id=%s' % item['episode_id'])
-                    if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0 and item['episode_id'] > 0:                   
+                    if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0:                   
                         player.filename = '%s.S%.2dE%.2d' % (formatName(item['showtitle']), float(item['season']), float(item['episode']))
                         log('tvshowtitle=%s' % player.filename)
                         player.episode = FindEpisode(player.token, item['episode_id'])
-                        log('episode.is_found=%s' % player.episode.is_found)
+                        log('Is episode find with Episode_id  :%s' % player.episode.is_found)
+                        if not player.episode.is_found:
+                            player.episode = FindEpisode(player.token,0, player.filename);
+                            item['episode_id'] = self.episode.id
+                        log('Is episode find with Filename  :%s' % player.episode.is_found)
+
                         if player.episode.is_found:
                             if player.notifications == 'true':                        
                                 if player.notif_during_playback == 'false' and player.isPlaying() == 1:
@@ -136,7 +141,10 @@ class Monitor(xbmc.Monitor):
                             notif(__language__(32905), time=2500)              
         if (method == 'Player.OnStop'): 
             self._tearDown()
-            actual_percent = (self._last_pos/self._total_time)*100
+            if self._total_time > 0:
+                actual_percent = (self._last_pos/self._total_time)*100
+            else:
+                actual_percent = 0;
             log('last_pos / total_time : %s / %s = %s %%' % (self._last_pos, self._total_time, actual_percent)) 
             log('Player.OnStop') 
             if player.http == 'true' and player.http_playing == True :
@@ -205,11 +213,16 @@ class Monitor(xbmc.Monitor):
                 log('episode=%s' % item['episode'])
                 log('episode_id=%s' % item['episode_id'])
                 log('playcount=%s' % playcount)
-                if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0 and item['episode_id'] > 0:
+                if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0:
                     self.filename = '%s.S%.2dE%.2d' % (formatName(item['showtitle']), float(item['season']), float(item['episode']))
                     log('tvshowtitle=%s' % self.filename)
                     self.episode = FindEpisode(player.token, item['episode_id'])
-                    log('episode.is_found=%s' % self.episode.is_found)
+                    log('Is episode find with Episode_id  :%s' % self.episode.is_found)
+                    if not self.episode.is_found:
+                        self.episode = FindEpisode(player.token,0, self.filename);
+                        item['episode_id'] = self.episode.id
+                    log('Is episode find with Filename  :%s' % self.episode.is_found)
+
                     if self.episode.is_found:
                         if playcount is 1:
                             log('MarkAsWatched(*, %s, %s, %s)' % (self.filename, player.facebook, player.twitter))
@@ -259,22 +272,30 @@ class Monitor(xbmc.Monitor):
                                     if player.notif_during_playback == 'false' and player.isPlaying() == 1:
                                         return
                                     notif(__language__(32907), time=2500)
+                                    
 
     def getEpisodeTVDB(self, xbmc_id):
         rpccmd = {'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodeDetails', 'params': {"episodeid": int(xbmc_id), 'properties': ['season', 'episode', 'tvshowid', 'showtitle', 'uniqueid']}, 'id': 1}
         rpccmd = json.dumps(rpccmd)
         result = xbmc.executeJSONRPC(rpccmd)
-        result = json.loads(result)        
-        log('result=%s' % result)    
-        log('episode_id=%s' % result['result']['episodedetails']['uniqueid']['unknown'])
+        result = json.loads(result)
+        log('resulto=%s' % result)
         
+        if 'unknown' in result['result']['episodedetails']['uniqueid']:
+            episode_id = result['result']['episodedetails']['uniqueid']['unknown']
+        elif 'tvdb' in result['result']['episodedetails']['uniqueid']:
+            episode_id = result['result']['episodedetails']['uniqueid']['tvdb']
+        else:
+            episode_id = 0
+        log('episode_id=%s' % episode_id)
+
         try:
             item = {}
             item['season'] = result['result']['episodedetails']['season']
             item['tvshowid'] = result['result']['episodedetails']['tvshowid']
             item['episode'] = result['result']['episodedetails']['episode']
             item['showtitle'] = result['result']['episodedetails']['showtitle']
-            item['episode_id'] = result['result']['episodedetails']['uniqueid']['unknown']
+            item['episode_id'] = episode_id
             return item
         except:
             return False
