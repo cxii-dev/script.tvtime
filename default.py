@@ -19,7 +19,7 @@ __scriptname__    = __addon__.getAddonInfo('name')
 __version__       = __addon__.getAddonInfo('version')
 __language__      = __addon__.getLocalizedString
 __resource_path__ = os.path.join(__cwd__, 'resources', 'lib')
-__resource__      = xbmc.translatePath(__resource_path__).decode('utf-8')
+__resource__      = xbmcvfs.translatePath(__resource_path__)
 __notifications__ = __addon__.getSetting('notifications')
 
 from resources.lib.tvtime import FindEpisode
@@ -39,7 +39,8 @@ class Monitor(xbmc.Monitor):
         self._playback_lock = threading.Event()
 
     def _trackPosition(self):
-        while self._playback_lock.isSet() and not xbmc.abortRequested:
+        monit = xbmc.Monitor()
+        while self._playback_lock.isSet() and not monit.abortRequested:
             try:
                 self._last_pos = player.getTime()
             except:
@@ -67,7 +68,7 @@ class Monitor(xbmc.Monitor):
     def onSettingsChanged( self ):
         log('onSettingsChanged')
         self.action()
-
+        
     def onNotification(self, sender, method, data):
         log('onNotification')
         log('method=%s' % method)
@@ -211,7 +212,7 @@ class Monitor(xbmc.Monitor):
                     self.episode = FindEpisode(player.token, item['episode_id'], self.filename)
                     log('episode.is_found=%s' % self.episode.is_found)
                     if self.episode.is_found:
-                        if playcount is 1:
+                        if playcount == 1:
                             log('MarkAsWatched(*, %s, %s, %s)' % (self.filename, player.facebook, player.twitter))
                             checkin = MarkAsWatched(player.token, self.episode.id, player.facebook, player.twitter)
                             log('checkin.is_marked:=%s' % checkin.is_marked)
@@ -243,7 +244,7 @@ class Monitor(xbmc.Monitor):
                                     if player.notif_during_playback == 'false' and player.isPlaying() == 1:
                                         return
                                     notif(__language__(32907), time=2500)
-                        if playcount is 0:
+                        if playcount == 0:
                             log('MarkAsUnWatched(*, %s)' % (self.filename))
                             checkin = MarkAsUnWatched(player.token, self.episode.id)
                             log('checkin.is_unmarked:=%s' % checkin.is_unmarked)
@@ -311,7 +312,7 @@ class Player(xbmc.Player):
         self.http_playing = False
         self.emotion = __addon__.getSetting('emotion')
         self.defaultemotion = __addon__.getSetting('defaultemotion')
-        if self.token is '':
+        if self.token == '':
             log(__language__(32901))
             if self.notifications == 'true':
                 notif(__language__(32901), time=2500)
@@ -370,8 +371,10 @@ def normalizeString(str):
 if ( __name__ == "__main__" ):
     player = Player()
     log("[%s] - Version: %s Started" % (__scriptname__, __version__))
-    while not xbmc.abortRequested:
-        xbmc.sleep(100)
+    monit = xbmc.Monitor()
+    while not monit.abortRequested():
+        if monit.waitForAbort(100):
+            break
     player._monitor = None
     log("sys.exit(0)")
     sys.exit(0)

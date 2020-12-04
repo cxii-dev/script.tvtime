@@ -6,6 +6,7 @@ import re
 import sys
 import threading
 import xbmc
+import xbmcvfs
 import xbmcgui
 import xbmcaddon
 import unicodedata
@@ -32,7 +33,7 @@ __scriptname__    = __addon__.getAddonInfo('name')
 __version__       = __addon__.getAddonInfo('version')
 __language__      = __addon__.getLocalizedString
 __resource_path__ = os.path.join(__cwd__, 'resources', 'lib')
-__resource__      = xbmc.translatePath(__resource_path__).decode('utf-8')
+__resource__      = xbmcvfs.translatePath(__resource_path__)
 
 __token__ = __addon__.getSetting('token')
 __facebook__ = __addon__.getSetting('facebook')
@@ -42,14 +43,14 @@ __welcome__ = __addon__.getSetting('welcome')
 
 def start():
     menuitems = []
-    if __token__ is '':
+    if __token__ == '':
         menuitems.append(__language__(33801))
     else:
         menuitems.append(__language__(33803))
         menuitems.append(__language__(33802))
     startmenu = xbmcgui.Dialog().select(__scriptname__, menuitems)
     if startmenu < 0: return
-    elif startmenu == 0 and __token__ is '':
+    elif startmenu == 0 and __token__ == '':
         _login = GetCode()
         if _login.is_code:
             Authorization(_login.verification_url, _login.user_code, _login.device_code)
