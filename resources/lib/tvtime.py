@@ -36,7 +36,7 @@ class FindEpisode(object):
         request_url = "%s%s" % (request_uri, self.action)
         try:
             response = self.opener.open(request_url, None)
-            data = json.loads(''.join(response.readlines()))
+            data = json.loads(response.read())
         except:
             data = None
         
@@ -74,7 +74,7 @@ class Show(object):
         request_url = "%s%s" % (request_uri, self.action)
         try:
             response = self.opener.open(request_url, None)
-            data = json.loads(''.join(response.readlines()))
+            data = json.loads(response.read())
         except:
             data = None
         
@@ -112,7 +112,7 @@ class GetLibrary(object):
         request_url = "%s%s" % (request_uri, self.action)
         try:
             response = self.opener.open(request_url, None)
-            data = json.loads(''.join(response.readlines()))
+            data = json.loads(response.read())
         except:
             data = None
         
@@ -146,7 +146,7 @@ class IsChecked(object):
         request_url = "%s%s" % (request_uri, self.action)
         try:
             response = self.opener.open(request_url, None)
-            data = json.loads(''.join(response.readlines()))
+            data = json.loads(response.read())
         except:
             data = None
         
@@ -172,7 +172,7 @@ class MarkAsWatched(object):
             'episode_id' : self.episode_id,
             'publish_on_ticker' : self.facebook,
             'publish_on_twitter' : self.twitter
-            })
+        }).encode("utf-8")
         
         self.cj = http.cookiejar.CookieJar()
         self.opener = urllib.request.build_opener(
@@ -190,7 +190,7 @@ class MarkAsWatched(object):
         request_url = "%s%s" % (request_uri, self.action)
         try:
             response = self.opener.open(request_url, request_data)
-            data = json.loads(''.join(response.readlines()))
+            data = json.loads(response.read())
         except:
             data = None
         
@@ -207,7 +207,7 @@ class MarkAsUnWatched(object):
         request_data = urllib.parse.urlencode({
             'access_token' : self.token,
             'episode_id' : self.episode_id
-            })
+        }).encode("utf-8")
         
         self.cj = http.cookiejar.CookieJar()
         self.opener = urllib.request.build_opener(
@@ -225,7 +225,7 @@ class MarkAsUnWatched(object):
         request_url = "%s%s" % (request_uri, self.action)
         try:
             response = self.opener.open(request_url, request_data)
-            data = json.loads(''.join(response.readlines()))
+            data = json.loads(response.read())
         except:
             data = None
         
@@ -244,7 +244,7 @@ class SaveProgress(object):
             'access_token' : self.token,
             'episode_id' : self.episode_id,
             'progress' : self.progress
-            })
+        }).encode("utf-8")
         
         self.cj = http.cookiejar.CookieJar()
         self.opener = urllib.request.build_opener(
@@ -262,7 +262,7 @@ class SaveProgress(object):
         request_url = "%s%s" % (request_uri, self.action)
         try:
             response = self.opener.open(request_url, request_data)
-            data = json.loads(''.join(response.readlines()))
+            data = json.loads(response.read())
         except:
             data = None
         
@@ -279,7 +279,7 @@ class Follow(object):
         request_data = urllib.parse.urlencode({
             'access_token' : self.token,
             'show_id' : self.show_id
-            })
+        }).encode("utf-8")
         
         self.cj = http.cookiejar.CookieJar()
         self.opener = urllib.request.build_opener(
@@ -297,7 +297,7 @@ class Follow(object):
         request_url = "%s%s" % (request_uri, self.action)
         try:
             response = self.opener.open(request_url, request_data)
-            data = json.loads(''.join(response.readlines()))
+            data = json.loads(response.read())
         except:
             data = None
         
@@ -314,7 +314,7 @@ class FollowShows(object):
         request_data = urllib.parse.urlencode({
             'access_token' : self.token,
             'show_id' : self.show_id
-            })
+        }).encode("utf-8")
         
         self.cj = http.cookiejar.CookieJar()
         self.opener = urllib.request.build_opener(
@@ -332,7 +332,7 @@ class FollowShows(object):
         request_url = "%s%s" % (request_uri, self.action)
         try:
             response = self.opener.open(request_url, request_data)
-            data = json.loads(''.join(response.readlines()))
+            data = json.loads(response.read())
         except:
             data = None
         
@@ -353,7 +353,7 @@ class SaveShowProgress(object):
             'show_id' : self.show_id,
             'season' : self.season,
             'episode' : self.episode
-            })
+        }).encode("utf-8")
         
         self.cj = http.cookiejar.CookieJar()
         self.opener = urllib.request.build_opener(
@@ -371,7 +371,7 @@ class SaveShowProgress(object):
         request_url = "%s%s" % (request_uri, self.action)
         try:
             response = self.opener.open(request_url, request_data)
-            data = json.loads(''.join(response.readlines()))
+            data = json.loads(response.read())
         except:
             data = None
         
@@ -388,7 +388,7 @@ class SaveShowsProgress(object):
         request_data = urllib.parse.urlencode({
             'access_token' : self.token,
             'shows' : self.shows
-            })
+        }).encode("utf-8")
         
         self.cj = http.cookiejar.CookieJar()
         self.opener = urllib.request.build_opener(
@@ -406,7 +406,7 @@ class SaveShowsProgress(object):
         request_url = "%s%s" % (request_uri, self.action)
         try:
             response = self.opener.open(request_url, request_data)
-            data = json.loads(''.join(response.readlines()))
+            data = json.loads(response.read())
         except:
             data = None
         
@@ -423,7 +423,7 @@ class DeleteShowProgress(object):
         request_data = urllib.parse.urlencode({
             'access_token' : self.token,
             'show_id' : self.show_id
-            })
+        }).encode("utf-8")
 
         self.cj = http.cookiejar.CookieJar()
         self.opener = urllib.request.build_opener(
@@ -442,7 +442,7 @@ class DeleteShowProgress(object):
         request_url = "%s%s" % (request_uri, self.action)
         try:
             response = self.opener.open(request_url, request_data)
-            data = json.loads(''.join(response.readlines()))
+            data = json.loads(response.read())
         except:
             data = None
         
@@ -460,7 +460,7 @@ class DeleteShowsProgress(object):
         request_data = urllib.parse.urlencode({
             'access_token' : self.token,
             'shows' : self.shows
-            })
+        }).encode("utf-8")
 
         self.cj = http.cookiejar.CookieJar()
         self.opener = urllib.request.build_opener(
@@ -479,7 +479,7 @@ class DeleteShowsProgress(object):
         request_url = "%s%s" % (request_uri, self.action)
         try:
             response = self.opener.open(request_url, request_data)
-            data = json.loads(''.join(response.readlines()))
+            data = json.loads(response.read())
         except:
             data = None
         
@@ -499,7 +499,7 @@ class SetEmotion(object):
             'access_token' : self.token,
             'episode_id' : self.episode_id,
             'emotion_id' : self.emotion_id
-            })
+        }).encode("utf-8")
         
         self.cj = http.cookiejar.CookieJar()
         self.opener = urllib.request.build_opener(
@@ -517,7 +517,7 @@ class SetEmotion(object):
         request_url = "%s%s" % (request_uri, self.action)
         try:
             response = self.opener.open(request_url, request_data)
-            data = json.loads(''.join(response.readlines()))
+            data = json.loads(response.read())
         except:
             data = None
         
@@ -547,7 +547,7 @@ class GetUserInformations(object):
         request_url = "%s%s" % (request_uri, self.action)
         try:
             response = self.opener.open(request_url, None)
-            data = json.loads(''.join(response.readlines()))
+            data = json.loads(response.read())
         except:
             data = None
         
@@ -563,7 +563,7 @@ class GetCode(object):
         self.action = 'oauth/device/code'
         request_data = urllib.parse.urlencode({
             'client_id' : self.client_id
-            })
+        }).encode("utf-8")
         
         self.cj = http.cookiejar.CookieJar()
         self.opener = urllib.request.build_opener(
@@ -581,7 +581,7 @@ class GetCode(object):
         request_url = "%s%s" % (request_uri, self.action)
         try:
             response = self.opener.open(request_url, request_data)
-            data = json.loads(''.join(response.readlines()))
+            data = json.loads(response.read())
         except:
             data = None
         
@@ -605,7 +605,7 @@ class Authorize(object):
             'client_id' : self.client_id,
             'client_secret' : self.client_secret,
             'code' : self.code
-            })
+        }).encode("utf-8")
         
         self.cj = http.cookiejar.CookieJar()
         self.opener = urllib.request.build_opener(
@@ -623,7 +623,7 @@ class Authorize(object):
         request_url = "%s%s" % (request_uri, self.action)
         try:
             response = self.opener.open(request_url, request_data)
-            data = json.loads(''.join(response.readlines()))
+            data = json.loads(response.read())
         except:
             data = None
         
