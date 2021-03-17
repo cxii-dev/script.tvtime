@@ -6,6 +6,7 @@ import re
 import sys
 import threading
 import xbmc
+import xbmcvfs
 import xbmcgui
 import xbmcaddon
 import unicodedata
@@ -32,7 +33,7 @@ __scriptname__    = __addon__.getAddonInfo('name')
 __version__       = __addon__.getAddonInfo('version')
 __language__      = __addon__.getLocalizedString
 __resource_path__ = os.path.join(__cwd__, 'resources', 'lib')
-__resource__      = xbmc.translatePath(__resource_path__).decode('utf-8')
+__resource__      = xbmcvfs.translatePath(__resource_path__)
 
 __token__ = __addon__.getSetting('token')
 __facebook__ = __addon__.getSetting('facebook')
@@ -42,14 +43,14 @@ __welcome__ = __addon__.getSetting('welcome')
 
 def start():
     menuitems = []
-    if __token__ is '':
+    if __token__ == '':
         menuitems.append(__language__(33801))
     else:
         menuitems.append(__language__(33803))
         menuitems.append(__language__(33802))
     startmenu = xbmcgui.Dialog().select(__scriptname__, menuitems)
     if startmenu < 0: return
-    elif startmenu == 0 and __token__ is '':
+    elif startmenu == 0 and __token__ == '':
         _login = GetCode()
         if _login.is_code:
             Authorization(_login.verification_url, _login.user_code, _login.device_code)
@@ -67,7 +68,7 @@ def start():
         
 def Authorization(verification_url, user_code, device_code):
     pDialog = xbmcgui.DialogProgress()
-    pDialog.create(__scriptname__, "%s: %s" % (__language__(33806), verification_url), "%s: %s" % (__language__(33807), user_code))
+    pDialog.create(__scriptname__, "%s: %s\n%s: %s" % (__language__(33806), verification_url, __language__(33807), user_code))
     for i in range(0, 100):
         pDialog.update(i)
         xbmc.sleep(5000)  
@@ -78,7 +79,7 @@ def Authorization(verification_url, user_code, device_code):
             user = GetUserInformations(_authorize.access_token)
             if user.is_authenticated:
                 if __welcome__ == 'true':
-                    xbmcgui.Dialog().ok(__scriptname__, '%s %s' % (__language__(32902), user.username), __language__(33808))
+                    xbmcgui.Dialog().ok(__scriptname__, '%s %s\n%s' % (__language__(32902), user.username, __language__(33808)))
                 __addon__.setSetting('user', user.username)
             return
     pDialog.close()
@@ -141,7 +142,7 @@ def scan(way):
         total = len(tvshowsList) 
         for tvshowList in tvshowsList:
             cpt = cpt + 1
-            pc = (cpt*100)/total
+            pc = int((cpt*100)/total)
             pDialog.update(pc, message=tvshowList['title'])
             xbmc.sleep(100)
             if tvshowList['seen'] == 1:
@@ -164,7 +165,7 @@ def scan(way):
             pDialog.update(0, message=__language__(33908))     
             for showSeen in showsSeen:
                 cpt = cpt + 1
-                pc = (cpt*100)/total
+                pc = int((cpt*100)/total)
                 tempShowsSeen.append({
                     'show_id': int(showSeen['show_id']),
                     'season': showSeen['season'],
@@ -188,7 +189,7 @@ def scan(way):
             pDialog.update(0, message=__language__(33908)) 
             for showNotSeen in showsNotSeen:
                 cpt = cpt + 1
-                pc = (cpt*100)/total
+                pc = int((cpt*100)/total)
                 tempShowsNotSeen.append({
                     'show_id': int(showNotSeen['show_id'])
                 })
@@ -221,7 +222,7 @@ def scan(way):
             for i in range(0, total):
                 for tvshowTime in tvshowTimeList:
                     if int(tvshowList[i]['show_id']) == int(tvshowTime['show_id']):
-                        pDialog.update(((100/total)*(i+1)), message=tvshowTime['title'])
+                        pDialog.update(int((100/total)*(i+1)), message=tvshowTime['title'])
                         log('setTvshowProgress(%s, %s, %s)' % (tvshowTime['show_id'], tvshowTime['season'], tvshowTime['episode']))
                         tvshowProgress = setTvshowProgress(tvshowTime['show_id'], tvshowTime['season'], tvshowTime['episode'])
         pDialog.update(100, message=__language__(33907))
@@ -236,7 +237,7 @@ def getTvshowList():
     tvshows = json.loads(result)
     log('tvshows=%s' % tvshows)  
     tvshowList = []
-    if tvshows.has_key('result') and tvshows['result'] != None and tvshows['result'].has_key('tvshows'):
+    if 'result' in tvshows and tvshows['result'] != None and 'tvshows' in tvshows['result']:
         tvshows = tvshows['result']['tvshows']
         for tvshow in tvshows:
             rpccmd = {'jsonrpc': '2.0', 'method': 'VideoLibrary.GetEpisodes', 'params': {'tvshowid': tvshow['tvshowid'], 'properties': ['season', 'episode', 'playcount']}, 'id': 1}
@@ -245,7 +246,7 @@ def getTvshowList():
             episodes = json.loads(result)
             log('tvshow=%s [%s]' % (tvshow['title'], tvshow['imdbnumber'])) 
             log('episodes[%s]=%s' % (tvshow['imdbnumber'], episodes)) 
-            if episodes.has_key('result') and episodes['result'] != None and episodes['result'].has_key('episodes'):
+            if 'result' in episodes and episodes['result'] != None and 'episodes' in episodes['result']:
                 episodes = episodes['result']['episodes']
                 lastEpisode = None
                 lastSeasonNr = 0
@@ -321,7 +322,7 @@ def setTvshowProgress(show_id, last_season_seen, last_episode_seen):
             rpccmd = json.dumps(rpccmd)
             result = xbmc.executeJSONRPC(rpccmd)
             episodes = json.loads(result)  
-            log('episodes=%s' % episodes)  
+            log('episodes=%s' % episodes)
             if episodes['result']['limits']['total'] > 0:
                 episodes = episodes['result']['episodes']
                 for episode in episodes:
