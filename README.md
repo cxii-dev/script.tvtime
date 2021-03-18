@@ -12,7 +12,7 @@ Please follow Build or Download steps below to install this version.
 
 If you want to build it manually, please follow the steps below:
 
-1. Clone this repository `sudo git clone https://github.com/alxlaxv/script.tvtime.git`
+1. Clone this repository `sudo git clone https://github.com/the-lazy-fox/script.tvtime.git`
 2. Enter in script.tvtime `cd script.tvtime`
 3. Make the compile script executable `sudo chmod +x compile.sh`
 4. Launch the compile script `./compile.sh`
