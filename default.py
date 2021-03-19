@@ -113,7 +113,7 @@ class Monitor(xbmc.Monitor):
                     log('season=%s' % item['season'])
                     log('episode=%s' % item['episode'])
                     log('episode_id=%s' % item['episode_id'])
-                    if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0 and item['episode_id'] > 0:
+                    if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0 and len(str(item['episode_id'])) > 0:
                         player.filename = '%s.S%.2dE%.2d' % (formatName(item['showtitle']), float(item['season']), float(item['episode']))
                         log('tvshowtitle=%s' % player.filename)
                         player.episode = FindEpisode(player.token, item['episode_id'], player.filename)
@@ -186,7 +186,7 @@ class Monitor(xbmc.Monitor):
                         log('season=%s' % item['season'])
                         log('episode=%s' % item['episode'])
                         log('episode_id=%s' % item['episode_id'])
-                        if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0 and item['episode_id'] > 0:
+                        if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0 and len(str(item['episode_id'])) > 0:
                             player.filename = '%s.S%.2dE%.2d' % (formatName(item['showtitle']), float(item['season']), float(item['episode']))
                             log('tvshowtitle=%s' % player.filename)
                         log('progress=%s' % self._last_pos)
@@ -206,7 +206,7 @@ class Monitor(xbmc.Monitor):
                 log('episode=%s' % item['episode'])
                 log('episode_id=%s' % item['episode_id'])
                 log('playcount=%s' % playcount)
-                if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0 and item['episode_id'] > 0:
+                if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0 and len(str(item['episode_id'])) > 0:
                     self.filename = '%s.S%.2dE%.2d' % (formatName(item['showtitle']), float(item['season']), float(item['episode']))
                     log('tvshowtitle=%s' % self.filename)
                     self.episode = FindEpisode(player.token, item['episode_id'], self.filename)
@@ -366,7 +366,7 @@ def encode(string):
     return result
 
 def normalizeString(str):
-    return unicodedata.normalize('NFKD', str).encode('ascii','ignore').encode('UTF-8','replace')
+    return unicodedata.normalize('NFKD', str).encode('ascii','ignore').decode('UTF-8','replace')
 
 if ( __name__ == "__main__" ):
     player = Player()
