@@ -117,7 +117,7 @@ class Monitor(xbmc.Monitor):
             player.http_playing = False
             response = json.loads(data)
             log('%s' % response)
-            if response.get('item') is not None and reponse.get.get('type') != 'episode':
+            if response.get('item') is None or response.get('item').get('type') != 'episode':
                 return
 
             xbmc_id = response.get('item').get('id')
@@ -231,8 +231,9 @@ class Monitor(xbmc.Monitor):
         log('VideoLibrary.OnUpdate')
         response = json.loads(data)
         log('%s' % response)
-        if response.get('item').get('type') != 'episode':
+        if response.get('item') is None or response.get('item').get('type') != 'episode':
             return
+
         xbmc_id = response.get('item').get('id')
         playcount = response.get('playcount')
         log('playcount=%s' % playcount)
