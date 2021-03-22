@@ -45,6 +45,7 @@ class FindEpisode(object):
         else:
            self.is_found = True
            self.resultdata = data['result']
+           self.showid = data['episode']['show']['id']
            self.showname = data['episode']['show']['name']
            self.episodename = data['episode']['name']
            self.season_number = data['episode']['season_number']
@@ -170,10 +171,8 @@ class MarkAsWatched(object):
         else: self.twitter = 0
 
         self.autofollow = autofollow
-        if self.autofollow == True: self.autofollow = 1
-        else: self.autofollow = 0
-
         self.action = 'checkin'
+
         request_data = urllib.parse.urlencode({
             'access_token' : self.token,
             'episode_id' : self.episode_id,
@@ -206,7 +205,7 @@ class MarkAsWatched(object):
            self.is_marked = False
         else:
            self.is_marked = True
-           
+
 class MarkAsUnWatched(object):
     def __init__(self, token, episode_id):
         self.token = token

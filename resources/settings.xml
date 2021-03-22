@@ -5,6 +5,7 @@
 	   <setting id="user" type="text" label="32301" enable="false" />
 	   <setting id="progress" type="bool" label="32302" default="true" />
 	   <setting id="http" type="bool" label="32303" default="false" />
+	   <setting id="autofollow" type="bool" label="32304" default="true" />
 	</category>
 	<category label="33001">  
 	   <setting id="notifications" type="bool" label="33301" default="true" />

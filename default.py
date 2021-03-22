@@ -24,6 +24,7 @@ __notifications__ = __addon__.getSetting('notifications')
 
 from resources.lib.tvtime import FindEpisode
 from resources.lib.tvtime import MarkAsWatched
+from resources.lib.tvtime import Follow
 from resources.lib.tvtime import MarkAsUnWatched
 from resources.lib.tvtime import GetUserInformations
 from resources.lib.tvtime import SaveProgress
@@ -173,11 +174,20 @@ class Monitor(xbmc.Monitor):
             if actual_percent <= 90:
                 return
 
-            log('MarkAsWatched(*, %s, %s, %s)' % (player.filename, player.facebook, player.twitter))
-            checkin = MarkAsWatched(player.token, player.episode.id, player.facebook, player.twitter)
+            log('MarkAsWatched(*, %s, %s, %s, %s)' % (player.filename, player.facebook, player.twitter, player.autofollow))
+            checkin = MarkAsWatched(player.token, player.episode.id, player.facebook, player.twitter, player.autofollow)
             log('checkin.is_marked:=%s' % checkin.is_marked)
             if not checkin.is_marked:
                 return
+
+            # this is just temporary fix because TVTime's Checkin API is not working correctly
+            # auto_follow parameter is not working, if tvtime fixes this issue we can remove this piece of code
+            try:
+                if player.autofollow:
+                    log("following tvshow manually=%s" % player.episode.showid)
+                    Follow(player.token, player.episode.showid)
+            except:
+                pass
 
             if player.emotion == 'true':
                 msg = '%s: %s %sx%s' % (__language__(33909), player.episode.showname, player.episode.season_number, player.episode.number)
@@ -257,9 +267,19 @@ class Monitor(xbmc.Monitor):
             return
 
         if playcount == 1:
-            log('MarkAsWatched(*, %s, %s, %s)' % (self.filename, player.facebook, player.twitter))
-            checkin = MarkAsWatched(player.token, self.episode.id, player.facebook, player.twitter)
+            log('MarkAsWatched(*, %s, %s, %s, %s)' % (self.filename, player.facebook, player.twitter, player.autofollow))
+            checkin = MarkAsWatched(player.token, self.episode.id, player.facebook, player.twitter, player.autofollow)
             log('checkin.is_marked:=%s' % checkin.is_marked)
+
+            # this is just temporary fix because TVTime's Checkin API is not working correctly
+            # auto_follow parameter is not working, if tvtime fixes this issue we can remove this piece of code
+            try:
+                if player.autofollow:
+                    log("following tvshow manually=%s" % self.episode.showid)
+                    Follow(player.token, self.episode.showid)
+            except:
+                pass
+
             if checkin.is_marked:
                 if player.emotion == 'true':
                     emotion = xbmcgui.Dialog().select('%s: %s' % (__language__(33909), self.filename), [__language__(35311), __language__(35312), __language__(35313), __language__(35314), __language__(35316), __language__(35317)])
@@ -353,6 +373,7 @@ class Player(xbmc.Player):
         self.welcome = __addon__.getSetting('welcome')
         self.notifications = __addon__.getSetting('notifications')
         self.notif_during_playback = __addon__.getSetting('notif_during_playback')
+        self.autofollow = __addon__.getSetting('autofollow')
         self.notif_scrobbling = __addon__.getSetting('notif_scrobbling')
         self.progress = __addon__.getSetting('progress')
         self.http = __addon__.getSetting('http')
