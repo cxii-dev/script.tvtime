@@ -72,6 +72,8 @@ class Monitor(xbmc.Monitor):
     def onNotification(self, sender, method, data):
         log('onNotification')
         log('method=%s' % method)
+        log('sender=%s' % sender)
+        log('data=%s' % data)
         if (method == 'Player.OnPlay'):
             self._player_onplay(data)
         if (method == 'Player.OnStop'):
@@ -87,6 +89,7 @@ class Monitor(xbmc.Monitor):
         if player.http == 'true' and player.getPlayingFile()[:4] == 'http' and re.search(r'[sS][0-9]*[eE][0-9]*', os.path.basename(player.getPlayingFile()), flags=0) :
             player.http_playing = True
             player.filename = os.path.basename(player.getPlayingFile())
+            log('rawname=%s' % player.filename)
             startcut = player.filename.find("%5B")
             endcut = player.filename.find("%5D")
             tocut = player.filename[startcut:endcut]
@@ -114,7 +117,7 @@ class Monitor(xbmc.Monitor):
             player.http_playing = False
             response = json.loads(data)
             log('%s' % response)
-            if response.get('item').get('type') != 'episode':
+            if response.get('item') is not None and reponse.get.get('type') != 'episode':
                 return
 
             xbmc_id = response.get('item').get('id')
@@ -241,7 +244,7 @@ class Monitor(xbmc.Monitor):
         log('episode_id=%s' % item['episode_id'])
         log('playcount=%s' % playcount)
 
-        if len(item['showtitle']) > 0 and item['season'] > 0 and item['episode'] > 0 and len(str(item['episode_id'])) > 0:
+        if item.get('showtitle') is None or item.get('season') is None or item.get('episode') is None or item.get('episode_id') is None:
             return
 
         self.filename = '%s.S%.2dE%.2d' % (formatName(item['showtitle']), float(item['season']), float(item['episode']))
@@ -398,7 +401,7 @@ def notif(msg, time=5000):
 
 def log(msg):
     xbmc.log("### [%s] - %s" % (__scriptname__, encode(msg), ),
-            level=xbmc.LOGDEBUG) #100 #xbmc.LOGDEBUG
+            level=xbmc.LOGINFO) #100 #xbmc.LOGDEBUG
 
 def encode(string):
     result = ''
