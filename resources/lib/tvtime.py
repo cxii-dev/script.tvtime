@@ -157,21 +157,29 @@ class IsChecked(object):
            self.is_watched = data['code']
 
 class MarkAsWatched(object):
-    def __init__(self, token, episode_id, facebook=0, twitter=0):
+    def __init__(self, token, episode_id, facebook=0, twitter=0, autofollow=1):
         self.token = token
         self.episode_id = episode_id
+
         self.facebook = facebook
         if self.facebook == True: self.facebook = 1
         else: self.facebook = 0
+
         self.twitter = twitter
         if self.twitter == True: self.twitter = 1
         else: self.twitter = 0
+
+        self.autofollow = autofollow
+        if self.autofollow == True: self.autofollow = 1
+        else: self.autofollow = 0
+
         self.action = 'checkin'
         request_data = urllib.parse.urlencode({
             'access_token' : self.token,
             'episode_id' : self.episode_id,
             'publish_on_ticker' : self.facebook,
-            'publish_on_twitter' : self.twitter
+            'publish_on_twitter' : self.twitter,
+            'auto_follow': self.autofollow
         }).encode("utf-8")
         
         self.cj = http.cookiejar.CookieJar()
