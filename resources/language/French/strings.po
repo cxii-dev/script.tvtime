@@ -41,6 +41,10 @@ msgctxt "#32303"
 msgid "Mark the http streams"
 msgstr "Marquer les flux http"
 
+msgctxt "#32304"
+msgid "Auto-follow the show if not already followed"
+msgstr "Suivre automatiquement le spectacle s'il n'est pas déjà suivi"
+
 msgctxt "#33001"
 msgid "Notifications"
 msgstr "Notifications"

@@ -45,6 +45,7 @@ class FindEpisode(object):
         else:
            self.is_found = True
            self.resultdata = data['result']
+           self.showid = data['episode']['show']['id']
            self.showname = data['episode']['show']['name']
            self.episodename = data['episode']['name']
            self.season_number = data['episode']['season_number']
@@ -157,21 +158,27 @@ class IsChecked(object):
            self.is_watched = data['code']
 
 class MarkAsWatched(object):
-    def __init__(self, token, episode_id, facebook=0, twitter=0):
+    def __init__(self, token, episode_id, facebook=0, twitter=0, autofollow=1):
         self.token = token
         self.episode_id = episode_id
+
         self.facebook = facebook
         if self.facebook == True: self.facebook = 1
         else: self.facebook = 0
+
         self.twitter = twitter
         if self.twitter == True: self.twitter = 1
         else: self.twitter = 0
+
+        self.autofollow = autofollow
         self.action = 'checkin'
+
         request_data = urllib.parse.urlencode({
             'access_token' : self.token,
             'episode_id' : self.episode_id,
             'publish_on_ticker' : self.facebook,
-            'publish_on_twitter' : self.twitter
+            'publish_on_twitter' : self.twitter,
+            'auto_follow': self.autofollow
         }).encode("utf-8")
         
         self.cj = http.cookiejar.CookieJar()
@@ -198,7 +205,7 @@ class MarkAsWatched(object):
            self.is_marked = False
         else:
            self.is_marked = True
-           
+
 class MarkAsUnWatched(object):
     def __init__(self, token, episode_id):
         self.token = token
