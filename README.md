@@ -1,3 +1,7 @@
+# Notice ⚠️
+TV Time has officially stopped its API and this addon for Kodi is based on it. Therefore this addon is not work anymore until further notice.
+Please see #5 for more details and alternatives
+
 # script.tvtime
 
 Kodi plugin for [TV Time](http://www.tvtime.com)
