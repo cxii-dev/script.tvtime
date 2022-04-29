@@ -41,6 +41,10 @@ msgctxt "#32303"
 msgid "Mark the http streams"
 msgstr "Marquer les flux http"
 
+msgctxt "#32304"
+msgid "Auto-follow the show if not already followed"
+msgstr "Suivre automatiquement le spectacle s'il n'est pas déjà suivi"
+
 msgctxt "#33001"
 msgid "Notifications"
 msgstr "Notifications"
@@ -91,7 +95,7 @@ msgstr "Bien"
 
 msgctxt "#35312"
 msgid "Funk"
-msgstr "Fun"
+msgstr "Drole"
 
 msgctxt "#35313"
 msgid "Wow"
@@ -99,15 +103,15 @@ msgstr "Wow"
 
 msgctxt "#35314"
 msgid "Sad"
-msgstr "triste"
+msgstr "Triste"
 
 msgctxt "#35316"
 msgid "Soso"
-msgstr "Mitigé"
+msgstr "Bof"
 
 msgctxt "#35317"
 msgid "Bad"
-msgstr "Mauvais"
+msgstr "Nul"
 
 msgctxt "#32901"
 msgid "Please login"
